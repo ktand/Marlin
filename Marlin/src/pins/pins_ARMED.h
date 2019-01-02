@@ -42,12 +42,29 @@
 //
 // Limit Switches
 //
+#ifndef X_MIN_PIN
 #define X_MIN_PIN          PE0
+#endif
+
+#ifndef X_MAX_PIN
 #define X_MAX_PIN          -1
+#endif
+
+#ifndef Y_MIN_PIN
 #define Y_MIN_PIN          PE1
+#endif
+
+#ifndef Y_MAX_PIN
 #define Y_MAX_PIN          -1
+#endif
+
+#ifndef Z_MIN_PIN
 #define Z_MIN_PIN          PE14
+#endif
+
+#ifndef Z_MAX_PIN
 #define Z_MAX_PIN          -1
+#endif
 
 //
 // Z Probe (when not Z_MIN_PIN)
