@@ -683,7 +683,7 @@
 //
 // Use Junction Deviation instead of traditional Jerk Limiting
 //
-//#define JUNCTION_DEVIATION
+#define JUNCTION_DEVIATION
 #if ENABLED(JUNCTION_DEVIATION)
   #define JUNCTION_DEVIATION_MM 0.02  // (mm) Distance from real junction edge
 #endif
@@ -712,7 +712,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -825,7 +825,7 @@
  */
 #define X_PROBE_OFFSET_FROM_EXTRUDER 24  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 9   // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.73   // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.80   // Z offset: -below +above  [the nozzle]
 
 // Certain types of probes need to stay away from edges
 #define MIN_PROBE_EDGE 0
