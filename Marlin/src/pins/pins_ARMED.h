@@ -130,7 +130,7 @@
 #define SDSS               PE7
 #define LED_PIN            PB7   // Heart beat
 #define PS_ON_PIN          PA10
-#define KILL_PIN           PA8
+// #define KILL_PIN           PA8
 #define PWR_LOSS           PA4   // Power loss / nAC_FAULT
 
 //
