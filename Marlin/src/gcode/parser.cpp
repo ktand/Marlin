@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (C) 2019 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
@@ -357,7 +357,7 @@ void GCodeParser::unknown_command_error() {
       SERIAL_ECHO(string_arg);
       SERIAL_CHAR('"');
     }
-    SERIAL_ECHOPGM("\n\n");
+    SERIAL_ECHOLNPGM("\n");
     for (char c = 'A'; c <= 'Z'; ++c) {
       if (seen(c)) {
         SERIAL_ECHOPAIR("Code '", c); SERIAL_ECHOPGM("':");
@@ -376,7 +376,7 @@ void GCodeParser::unknown_command_error() {
         }
         else
           SERIAL_ECHOPGM(" (no value)");
-        SERIAL_ECHOPGM("\n\n");
+        SERIAL_ECHOLNPGM("\n");
       }
     }
   }
