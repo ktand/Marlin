@@ -113,7 +113,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-// #define SERIAL_PORT_2 3
+#define SERIAL_PORT_2 4
 
 /**
  * This setting determines the communication speed of the printer.
@@ -498,9 +498,13 @@
 
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-  #define DEFAULT_bedKp 144.87
-  #define DEFAULT_bedKi 27.00
-  #define DEFAULT_bedKd 194.30
+  // #define DEFAULT_bedKp 144.87
+  // #define DEFAULT_bedKi 27.00
+  // #define DEFAULT_bedKd 194.30
+
+  #define DEFAULT_bedKp 120.46
+  #define DEFAULT_bedKi 6.28
+  #define DEFAULT_bedKd 577.87
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
@@ -719,9 +723,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1500    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   1500    // X, Y, Z acceleration for travel (non printing) moves
 
 //
 // Use Junction Deviation instead of traditional Jerk Limiting
@@ -745,7 +749,7 @@
   #define DEFAULT_ZJERK  0.3
 #endif
 
-#define DEFAULT_EJERK    5.0  // May be used by Linear Advance
+#define DEFAULT_EJERK    2.5  // May be used by Linear Advance
 
 /**
  * S-Curve Acceleration
@@ -755,7 +759,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-// #define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -989,8 +993,8 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 240
-#define Y_BED_SIZE 200
+#define X_BED_SIZE 245
+#define Y_BED_SIZE 205
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1156,9 +1160,9 @@
   //#define BACK_PROBE_BED_POSITION (Y_BED_SIZE - (MIN_PROBE_EDGE))
 
   #define LEFT_PROBE_BED_POSITION (24)
-  #define RIGHT_PROBE_BED_POSITION (24+200)
+  #define RIGHT_PROBE_BED_POSITION (24+215)
   #define FRONT_PROBE_BED_POSITION (9)
-  #define BACK_PROBE_BED_POSITION (9+190)
+  #define BACK_PROBE_BED_POSITION (9+195)
 
   // Probe along the Y axis, advancing X after each column
   //#define PROBE_Y_FIRST
