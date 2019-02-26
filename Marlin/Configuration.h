@@ -135,8 +135,8 @@
   #define MOTHERBOARD BOARD_ARMED
 #endif
 
-#define ARMED_V1_0
-#define ARMED_SWAP_X_E1
+// #define ARMED_V1_1
+// #define ARMED_SWAP_X_E1
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
