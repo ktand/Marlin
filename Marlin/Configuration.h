@@ -1284,8 +1284,8 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (100*60)
-#define HOMING_FEEDRATE_Z  (12*60)
+#define HOMING_FEEDRATE_XY (100*60) // Prusa MK3S 3000
+#define HOMING_FEEDRATE_Z  (12*60)  // Prusa MK3S 800
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
