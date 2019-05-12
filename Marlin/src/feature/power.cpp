@@ -46,8 +46,12 @@ bool Power::is_power_needed() {
     HOTEND_LOOP() if (thermalManager.autofan_speed[e]) return true;
   #endif
 
-  #if ENABLED(AUTO_POWER_CONTROLLERFAN) && HAS_CONTROLLER_FAN && ENABLED(USE_CONTROLLER_FAN)
+  #if ENABLED(AUTO_POWER_CONTROLLERFAN, USE_CONTROLLER_FAN) && HAS_CONTROLLER_FAN
     if (controllerfan_speed) return true;
+  #endif
+
+  #if ENABLED(AUTO_POWER_CHAMBER_FAN)
+    if (thermalManager.chamberfan_speed) return true;
   #endif
 
   // If any of the drivers or the bed are enabled...

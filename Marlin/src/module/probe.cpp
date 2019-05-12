@@ -38,7 +38,7 @@
 #include "../gcode/gcode.h"
 #include "../lcd/ultralcd.h"
 
-#if ENABLED(BLTOUCH) || ENABLED(Z_PROBE_SLED) || ENABLED(Z_PROBE_ALLEN_KEY) || ENABLED(PROBE_TRIGGERED_WHEN_STOWED_TEST) || (QUIET_PROBING && ENABLED(PROBING_STEPPERS_OFF))
+#if ANY(Z_PROBE_SLED, Z_PROBE_ALLEN_KEY, PROBE_TRIGGERED_WHEN_STOWED_TEST) || (QUIET_PROBING && ENABLED(PROBING_STEPPERS_OFF))
   #include "../Marlin.h" // for stop(), disable_e_steppers
 #endif
 
@@ -54,7 +54,15 @@
   #include "planner.h"
 #endif
 
+#if ENABLED(MEASURE_BACKLASH_WHEN_PROBING)
+  #include "../feature/backlash.h"
+#endif
+
 float zprobe_zoffset; // Initialized by settings.load()
+
+#if ENABLED(BLTOUCH)
+  #include "../feature/bltouch.h"
+#endif
 
 #if HAS_Z_SERVO_PROBE
   #include "servo.h"
@@ -275,7 +283,7 @@ float zprobe_zoffset; // Initialized by settings.load()
     #endif
     #if ENABLED(PROBING_STEPPERS_OFF)
       disable_e_steppers();
-      #if DISABLED(DELTA)
+      #if DISABLED(DELTA, HOME_AFTER_DEACTIVATE)
         disable_X(); disable_Y();
       #endif
     #endif
@@ -288,37 +296,6 @@ float zprobe_zoffset; // Initialized by settings.load()
     );
   }
 #endif // QUIET_PROBING
-
-#if ENABLED(BLTOUCH)
-
-  void bltouch_command(const int angle) {
-    MOVE_SERVO(Z_PROBE_SERVO_NR, angle);  // Give the BL-Touch the command and wait
-    safe_delay(BLTOUCH_DELAY);
-  }
-
-  bool set_bltouch_deployed(const bool deploy) {
-    if (deploy && TEST_BLTOUCH()) {      // If BL-Touch says it's triggered
-      bltouch_command(BLTOUCH_RESET);    //  try to reset it.
-      bltouch_command(BLTOUCH_DEPLOY);   // Also needs to deploy and stow to
-      bltouch_command(BLTOUCH_STOW);     //  clear the triggered condition.
-      safe_delay(1500);                  // Wait for internal self-test to complete.
-                                         //  (Measured completion time was 0.65 seconds
-                                         //   after reset, deploy, and stow sequence)
-      if (TEST_BLTOUCH()) {              // If it still claims to be triggered...
-        SERIAL_ERROR_MSG(MSG_STOP_BLTOUCH);
-        stop();                          // punt!
-        return true;
-      }
-    }
-
-    bltouch_command(deploy ? BLTOUCH_DEPLOY : BLTOUCH_STOW);
-
-    if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPAIR("set_bltouch_deployed(", deploy, ")");
-
-    return false;
-  }
-
-#endif // BLTOUCH
 
 /**
  * Raise Z to a minimum height to make room for a probe to move
@@ -337,24 +314,35 @@ inline void do_probe_raise(const float z_raise) {
 
 FORCE_INLINE void probe_specific_action(const bool deploy) {
   #if ENABLED(PAUSE_BEFORE_DEPLOY_STOW)
+    do {
+      #if ENABLED(PAUSE_PROBE_DEPLOY_WHEN_TRIGGERED)
+        if (deploy == (READ(Z_MIN_PROBE_PIN) == Z_MIN_PROBE_ENDSTOP_INVERTING)) break;
+      #endif
 
-    BUZZ(100, 659);
-    BUZZ(100, 698);
+      BUZZ(100, 659);
+      BUZZ(100, 698);
 
-    PGM_P const ds_str = deploy ? PSTR(MSG_MANUAL_DEPLOY) : PSTR(MSG_MANUAL_STOW);
-    ui.return_to_status();       // To display the new status message
-    ui.set_status_P(ds_str, 99);
-    serialprintPGM(ds_str);
-    SERIAL_EOL();
+      PGM_P const ds_str = deploy ? PSTR(MSG_MANUAL_DEPLOY) : PSTR(MSG_MANUAL_STOW);
+      ui.return_to_status();       // To display the new status message
+      ui.set_status_P(ds_str, 99);
+      serialprintPGM(ds_str);
+      SERIAL_EOL();
 
-    KEEPALIVE_STATE(PAUSED_FOR_USER);
-    wait_for_user = true;
-    #if ENABLED(HOST_PROMPT_SUPPORT)
-      host_prompt_do(PROMPT_USER_CONTINUE, PSTR("Stow Probe"), PSTR("Continue"));
-    #endif
-    while (wait_for_user) idle();
-    ui.reset_status();
-    KEEPALIVE_STATE(IN_HANDLER);
+      KEEPALIVE_STATE(PAUSED_FOR_USER);
+      wait_for_user = true;
+      #if ENABLED(HOST_PROMPT_SUPPORT)
+        host_prompt_do(PROMPT_USER_CONTINUE, PSTR("Stow Probe"), PSTR("Continue"));
+      #endif
+      while (wait_for_user) idle();
+      ui.reset_status();
+      KEEPALIVE_STATE(IN_HANDLER);
+    } while(
+      #if ENABLED(PAUSE_PROBE_DEPLOY_WHEN_TRIGGERED)
+        true
+      #else
+        false
+      #endif
+    );
 
   #endif // PAUSE_BEFORE_DEPLOY_STOW
 
@@ -416,7 +404,7 @@ bool set_probe_deployed(const bool deploy) {
   if (deploy_stow_condition && unknown_condition)
     do_probe_raise(MAX(Z_CLEARANCE_BETWEEN_PROBES, Z_CLEARANCE_DEPLOY_PROBE));
 
-  #if ENABLED(Z_PROBE_SLED) || ENABLED(Z_PROBE_ALLEN_KEY)
+  #if EITHER(Z_PROBE_SLED, Z_PROBE_ALLEN_KEY)
     #if ENABLED(Z_PROBE_SLED)
       #define _AUE_ARGS true, false, false
     #else
@@ -479,30 +467,6 @@ bool set_probe_deployed(const bool deploy) {
   }
 #endif
 
-#if ENABLED(MEASURE_BACKLASH_WHEN_PROBING)
-  #if USES_Z_MIN_PROBE_ENDSTOP
-    #define TEST_PROBE_PIN (READ(Z_MIN_PROBE_PIN) != Z_MIN_PROBE_ENDSTOP_INVERTING)
-  #else
-    #define TEST_PROBE_PIN (READ(Z_MIN_PIN) != Z_MIN_ENDSTOP_INVERTING)
-  #endif
-
-  extern float backlash_measured_mm[];
-  extern uint8_t backlash_measured_num[];
-
-  /* Measure Z backlash by raising nozzle in increments until probe deactivates */
-  static void measure_backlash_with_probe() {
-    if (backlash_measured_num[Z_AXIS] == 255) return;
-
-    float start_height = current_position[Z_AXIS];
-    while (current_position[Z_AXIS] < (start_height + BACKLASH_MEASUREMENT_LIMIT) && TEST_PROBE_PIN)
-      do_blocking_move_to_z(current_position[Z_AXIS] + BACKLASH_MEASUREMENT_RESOLUTION, MMM_TO_MMS(BACKLASH_MEASUREMENT_FEEDRATE));
-
-    // The backlash from all probe points is averaged, so count the number of measurements
-    backlash_measured_mm[Z_AXIS] += current_position[Z_AXIS] - start_height;
-    backlash_measured_num[Z_AXIS]++;
-  }
-#endif
-
 /**
  * @brief Used by run_z_probe to do a single Z probe move.
  *
@@ -530,7 +494,7 @@ static bool do_probe_move(const float z, const float fr_mm_s) {
 
   // Deploy BLTouch at the start of any probe
   #if ENABLED(BLTOUCH)
-    if (set_bltouch_deployed(true)) return true;
+    if (bltouch.deploy()) return true;
   #endif
 
   // Disable stealthChop if used. Enable diag1 pin on driver.
@@ -553,7 +517,7 @@ static bool do_probe_move(const float z, const float fr_mm_s) {
 
   // Check to see if the probe was triggered
   const bool probe_triggered =
-    #if ENABLED(DELTA) && ENABLED(SENSORLESS_PROBING)
+    #if BOTH(DELTA, SENSORLESS_PROBING)
       endstops.trigger_state() & (_BV(X_MIN) | _BV(Y_MIN) | _BV(Z_MIN))
     #else
       TEST(endstops.trigger_state(),
@@ -582,7 +546,7 @@ static bool do_probe_move(const float z, const float fr_mm_s) {
 
   // Retract BLTouch immediately after a probe if it was triggered
   #if ENABLED(BLTOUCH)
-    if (probe_triggered && set_bltouch_deployed(false)) return true;
+    if (probe_triggered && bltouch.stow()) return true;
   #endif
 
   // Clear endstop flags
@@ -659,7 +623,7 @@ static float run_z_probe() {
       }
 
       #if ENABLED(MEASURE_BACKLASH_WHEN_PROBING)
-        measure_backlash_with_probe();
+        backlash.measure_with_probe();
       #endif
 
   #if MULTIPLE_PROBING > 2

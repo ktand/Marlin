@@ -31,6 +31,10 @@
 #include "../../gcode.h"
 #include "../../../feature/bedlevel/bedlevel.h"
 
+#if ENABLED(EXTENSIBLE_UI)
+  #include "../../../lcd/extensible_ui/ui_api.h"
+#endif
+
 /**
  * M421: Set a single Mesh Bed Leveling Z coordinate
  *
@@ -51,7 +55,7 @@ void GcodeSuite::M421() {
              hasQ = !hasZ && parser.seen('Q');
 
   if (hasC) {
-    const mesh_index_pair location = ubl.find_closest_mesh_point_of_type(REAL, current_position[X_AXIS], current_position[Y_AXIS], USE_NOZZLE_AS_REFERENCE, NULL);
+    const mesh_index_pair location = ubl.find_closest_mesh_point_of_type(REAL, current_position[X_AXIS], current_position[Y_AXIS], USE_NOZZLE_AS_REFERENCE, nullptr);
     ix = location.x_index;
     iy = location.y_index;
   }

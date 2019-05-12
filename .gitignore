@@ -171,4 +171,13 @@ CMakeListsPrivate.txt
 
 #CLion
 cmake-build-*
-.vscode/.browse.c_cpp.db*
+
+#Eclipse
+.project
+.cproject
+.pydevproject
+.settings
+.classpath
+
+#Python
+__pycache__
