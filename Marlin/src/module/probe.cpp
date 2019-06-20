@@ -103,6 +103,26 @@ float zprobe_zoffset; // Initialized by settings.load()
     #endif
   }
 
+#elif ENABLED(TOUCH_MI_PROBE)
+
+  // Move to the magnet to unlock the probe
+  void run_deploy_moves_script() {
+    #ifndef TOUCH_MI_DEPLOY_XPOS
+      #define TOUCH_MI_DEPLOY_XPOS 0
+    #elif X_HOME_DIR > 0 && TOUCH_MI_DEPLOY_XPOS > X_MAX_BED
+      TemporaryGlobalEndstopsState unlock_x(false);
+    #endif
+    do_blocking_move_to_x(TOUCH_MI_DEPLOY_XPOS);
+  }
+
+  // Move down to the bed to stow the probe
+  void run_stow_moves_script() {
+    const float old_pos[] = { current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS] };
+    endstops.enable_z_probe(false);
+    do_blocking_move_to_z(TOUCH_MI_RETRACT_Z, MMM_TO_MMS(HOMING_FEEDRATE_Z));
+    do_blocking_move_to(old_pos, MMM_TO_MMS(HOMING_FEEDRATE_Z));
+  }
+
 #elif ENABLED(Z_PROBE_ALLEN_KEY)
 
   void run_deploy_moves_script() {
@@ -356,11 +376,17 @@ FORCE_INLINE void probe_specific_action(const bool deploy) {
 
     dock_sled(!deploy);
 
-  #elif HAS_Z_SERVO_PROBE && DISABLED(BLTOUCH)
+  #elif HAS_Z_SERVO_PROBE
 
-    MOVE_SERVO(Z_PROBE_SERVO_NR, servo_angles[Z_PROBE_SERVO_NR][deploy ? 0 : 1]);
+    #if DISABLED(BLTOUCH)
+      MOVE_SERVO(Z_PROBE_SERVO_NR, servo_angles[Z_PROBE_SERVO_NR][deploy ? 0 : 1]);
+    #elif ENABLED(BLTOUCH_HS_MODE)
+      // In HIGH SPEED MODE, use the normal retractable probe logic in this code
+      // i.e. no intermediate STOWs and DEPLOYs in between individual probe actions
+      if (deploy) bltouch.deploy(); else bltouch.stow();
+    #endif
 
-  #elif ENABLED(Z_PROBE_ALLEN_KEY)
+  #elif EITHER(TOUCH_MI_PROBE, Z_PROBE_ALLEN_KEY)
 
     deploy ? run_deploy_moves_script() : run_stow_moves_script();
 
@@ -492,9 +518,8 @@ static bool do_probe_move(const float z, const float fr_mm_s) {
     }
   #endif
 
-  // Deploy BLTouch at the start of any probe
-  #if ENABLED(BLTOUCH)
-    if (bltouch.deploy()) return true;
+  #if ENABLED(BLTOUCH) && DISABLED(BLTOUCH_HS_MODE)
+    if (bltouch.deploy()) return true; // DEPLOY in LOW SPEED MODE on every probe action
   #endif
 
   // Disable stealthChop if used. Enable diag1 pin on driver.
@@ -544,9 +569,8 @@ static bool do_probe_move(const float z, const float fr_mm_s) {
     tmc_disable_stallguard(stepperZ, stealth_states.z);
   #endif
 
-  // Retract BLTouch immediately after a probe if it was triggered
-  #if ENABLED(BLTOUCH)
-    if (probe_triggered && bltouch.stow()) return true;
+  #if ENABLED(BLTOUCH) && DISABLED(BLTOUCH_HS_MODE)
+    if (probe_triggered && bltouch.stow()) return true; // STOW in LOW SPEED MODE on trigger on every probe action
   #endif
 
   // Clear endstop flags
@@ -722,7 +746,11 @@ float probe_pt(const float &rx, const float &ry, const ProbePtRaise raise_after/
   feedrate_mm_s = old_feedrate_mm_s;
 
   if (isnan(measured_z)) {
-    STOW_PROBE();
+    #if ENABLED(BLTOUCH) && DISABLED(BLTOUCH_HS_MODE)
+      bltouch.stow();
+    #else
+      STOW_PROBE();
+    #endif
     LCD_MESSAGEPGM(MSG_ERR_PROBING_FAILED);
     SERIAL_ERROR_MSG(MSG_ERR_PROBING_FAILED);
   }

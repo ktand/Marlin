@@ -51,8 +51,8 @@ typedef struct {
 
   uint16_t feedrate;
 
-  #if HOTENDS > 1
-    uint8_t active_hotend;
+  #if EXTRUDERS > 1
+    uint8_t active_extruder;
   #endif
 
   int16_t target_temperature[HOTENDS];
@@ -87,8 +87,8 @@ typedef struct {
   bool relative_mode, relative_modes_e;
 
   // Command queue
-  uint8_t commands_in_queue, cmd_queue_index_r;
-  char command_queue[BUFSIZE][MAX_CMD_SIZE];
+  uint8_t queue_length, queue_index_r;
+  char queue_buffer[BUFSIZE][MAX_CMD_SIZE];
 
   // SD Filename and position
   char sd_filename[MAXPATHNAMELENGTH];
