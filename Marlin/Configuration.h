@@ -730,7 +730,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4[, E5]]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 418 } // 16/16/16/16 uSteps
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 415 } // 16/16/16/16 uSteps
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -741,7 +741,7 @@
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 10, 50 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 20, 120 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -799,7 +799,7 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.02 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.01 // (mm) Distance from real junction edge
 #endif
 
 /**
@@ -933,7 +933,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET { 24, 9, -0.45 }
+#define NOZZLE_TO_PROBE_OFFSET { 24, 9, -0.38 }
 
 // Certain types of probes need to stay away from edges
 #define MIN_PROBE_EDGE 0
