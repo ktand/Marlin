@@ -333,8 +333,6 @@
   #endif
 #endif
 
-#define HAS_POWER_SWITCH (ENABLED(PSU_CONTROL) && PIN_EXISTS(PS_ON))
-
 /**
  * Temp Sensor defines
  */
@@ -1807,4 +1805,11 @@
 
 #if !NUM_SERIAL
   #undef BAUD_RATE_GCODE
+#endif
+
+#if ENABLED(Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS)
+  #undef Z_STEPPER_ALIGN_AMP
+#endif
+#ifndef Z_STEPPER_ALIGN_AMP
+  #define Z_STEPPER_ALIGN_AMP 1.0
 #endif
