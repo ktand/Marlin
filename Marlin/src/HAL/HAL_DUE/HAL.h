@@ -56,8 +56,7 @@
 #ifdef SERIAL_PORT_2
   #if SERIAL_PORT_2 == SERIAL_PORT
     #error "SERIAL_PORT_2 must be different from SERIAL_PORT. Please update your configuration."
-  #endif
-  #if SERIAL_PORT_2 == -1
+  #elif SERIAL_PORT_2 == -1
     #define MYSERIAL1 customizedSerial2
   #elif SERIAL_PORT_2 == 0
     #define MYSERIAL1 Serial
@@ -133,6 +132,7 @@ extern uint16_t HAL_adc_result;     // result of last ADC conversion
 inline void HAL_adc_init() {}//todo
 
 #define HAL_START_ADC(pin)  HAL_adc_start_conversion(pin)
+#define HAL_ADC_RESOLUTION  10
 #define HAL_READ_ADC()      HAL_adc_result
 #define HAL_ADC_READY()     true
 

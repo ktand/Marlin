@@ -45,11 +45,7 @@
   // About Printer > Printer Stats
   //
   void menu_info_stats() {
-    if (ui.use_click()) return ui.goto_previous_screen(
-      #if ENABLED(TURBO_BACK_MENU_ITEM)
-        true
-      #endif
-    );
+    if (ui.use_click()) return ui.go_back();
 
     char buffer[21];  // For macro usage
 
@@ -97,11 +93,7 @@
 // About Printer > Thermistors
 //
 void menu_info_thermistors() {
-  if (ui.use_click()) return ui.goto_previous_screen(
-    #if ENABLED(TURBO_BACK_MENU_ITEM)
-      true
-    #endif
-  );
+  if (ui.use_click()) return ui.go_back();
 
   char buffer[21];  // For macro usage
 
@@ -218,11 +210,7 @@ void menu_info_thermistors() {
 // About Printer > Board Info
 //
 void menu_info_board() {
-  if (ui.use_click()) return ui.goto_previous_screen(
-    #if ENABLED(TURBO_BACK_MENU_ITEM)
-      true
-    #endif
-  );
+  if (ui.use_click()) return ui.go_back();
 
   char buffer[21];  // For macro usage
 
@@ -257,11 +245,7 @@ void menu_info_board() {
 #else
 
   void menu_info_printer() {
-    if (ui.use_click()) return ui.goto_previous_screen(
-      #if ENABLED(TURBO_BACK_MENU_ITEM)
-        true
-      #endif
-    );
+    if (ui.use_click()) return ui.go_back();
     START_SCREEN();
     STATIC_ITEM_P(PSTR(MSG_MARLIN), SS_CENTER|SS_INVERT);       // Marlin
     STATIC_ITEM_P(PSTR(SHORT_BUILD_VERSION));                   // x.x.x-Branch
@@ -318,19 +302,22 @@ void menu_info() {
       SKIP_ITEM();
       SKIP_ITEM();
     #endif
-    SUBMENU(MSG_GAMES, (
-      #if HAS_GAME_MENU
-        menu_game
-      #elif ENABLED(MARLIN_BRICKOUT)
-        brickout.enter_game
-      #elif ENABLED(MARLIN_INVADERS)
-        invaders.enter_game
-      #elif ENABLED(MARLIN_SNAKE)
-        snake.enter_game
-      #elif ENABLED(MARLIN_MAZE)
-        maze.enter_game
-      #endif
-    ));
+    // Game sub-menu or the individual game
+    {
+      SUBMENU(
+        #if HAS_GAME_MENU
+          MSG_GAMES, menu_game
+        #elif ENABLED(MARLIN_BRICKOUT)
+          MSG_BRICKOUT, brickout.enter_game
+        #elif ENABLED(MARLIN_INVADERS)
+          MSG_INVADERS, invaders.enter_game
+        #elif ENABLED(MARLIN_SNAKE)
+          MSG_SNAKE, snake.enter_game
+        #elif ENABLED(MARLIN_MAZE)
+          MSG_MAZE, maze.enter_game
+        #endif
+      );
+    }
   #endif
 
   END_MENU();
