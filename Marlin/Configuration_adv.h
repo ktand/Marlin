@@ -83,15 +83,15 @@
 #endif
 
 #if TEMP_SENSOR_6 == 1000
-  #define HOTEND6_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND6_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND6_BETA                 3950    // Beta value
+#define HOTEND6_PULLUP_RESISTOR_OHMS 4700  // Pullup resistor
+#define HOTEND6_RESISTANCE_25C_OHMS 100000 // Resistance at 25C
+#define HOTEND6_BETA 3950                  // Beta value
 #endif
 
 #if TEMP_SENSOR_7 == 1000
-  #define HOTEND7_PULLUP_RESISTOR_OHMS 4700    // Pullup resistor
-  #define HOTEND7_RESISTANCE_25C_OHMS  100000  // Resistance at 25C
-  #define HOTEND7_BETA                 3950    // Beta value
+#define HOTEND7_PULLUP_RESISTOR_OHMS 4700  // Pullup resistor
+#define HOTEND7_RESISTANCE_25C_OHMS 100000 // Resistance at 25C
+#define HOTEND7_BETA 3950                  // Beta value
 #endif
 
 #if TEMP_SENSOR_BED == 1000
@@ -181,28 +181,28 @@
  * Thermal Protection parameters for the bed are just as above for hotends.
  */
 #if ENABLED(THERMAL_PROTECTION_BED)
-  #define THERMAL_PROTECTION_BED_PERIOD       120 // Seconds
-  #define THERMAL_PROTECTION_BED_HYSTERESIS     5 // Degrees Celsius
+#define THERMAL_PROTECTION_BED_PERIOD 120   // Seconds
+#define THERMAL_PROTECTION_BED_HYSTERESIS 5 // Degrees Celsius
 
 /**
    * As described above, except for the bed (M140/M190/M303).
    */
-  #define WATCH_BED_TEMP_PERIOD                60 // Seconds
-  #define WATCH_BED_TEMP_INCREASE               2 // Degrees Celsius
+#define WATCH_BED_TEMP_PERIOD 60  // Seconds
+#define WATCH_BED_TEMP_INCREASE 2 // Degrees Celsius
 #endif
 
 /**
  * Thermal Protection parameters for the heated chamber.
  */
 #if ENABLED(THERMAL_PROTECTION_CHAMBER)
-  #define THERMAL_PROTECTION_CHAMBER_PERIOD    20 // Seconds
-  #define THERMAL_PROTECTION_CHAMBER_HYSTERESIS 2 // Degrees Celsius
+#define THERMAL_PROTECTION_CHAMBER_PERIOD 20    // Seconds
+#define THERMAL_PROTECTION_CHAMBER_HYSTERESIS 2 // Degrees Celsius
 
 /**
    * Heated chamber watch settings (M141/M191).
    */
-  #define WATCH_CHAMBER_TEMP_PERIOD            60 // Seconds
-  #define WATCH_CHAMBER_TEMP_INCREASE           2 // Degrees Celsius
+#define WATCH_CHAMBER_TEMP_PERIOD 60  // Seconds
+#define WATCH_CHAMBER_TEMP_INCREASE 2 // Degrees Celsius
 #endif
 
 #if ENABLED(PIDTEMP)
@@ -494,43 +494,43 @@
 
 //#define X_DUAL_STEPPER_DRIVERS
 #if ENABLED(X_DUAL_STEPPER_DRIVERS)
-  #define INVERT_X2_VS_X_DIR true   // Set 'true' if X motors should rotate in opposite directions
-  //#define X_DUAL_ENDSTOPS
-  #if ENABLED(X_DUAL_ENDSTOPS)
-    #define X2_USE_ENDSTOP _XMAX_
-    #define X2_ENDSTOP_ADJUSTMENT  0
-  #endif
+#define INVERT_X2_VS_X_DIR true // Set 'true' if X motors should rotate in opposite directions
+//#define X_DUAL_ENDSTOPS
+#if ENABLED(X_DUAL_ENDSTOPS)
+#define X2_USE_ENDSTOP _XMAX_
+#define X2_ENDSTOP_ADJUSTMENT 0
+#endif
 #endif
 
 //#define Y_DUAL_STEPPER_DRIVERS
 #if ENABLED(Y_DUAL_STEPPER_DRIVERS)
-  #define INVERT_Y2_VS_Y_DIR true   // Set 'true' if Y motors should rotate in opposite directions
-  //#define Y_DUAL_ENDSTOPS
-  #if ENABLED(Y_DUAL_ENDSTOPS)
-    #define Y2_USE_ENDSTOP _YMAX_
-    #define Y2_ENDSTOP_ADJUSTMENT  0
-  #endif
+#define INVERT_Y2_VS_Y_DIR true // Set 'true' if Y motors should rotate in opposite directions
+//#define Y_DUAL_ENDSTOPS
+#if ENABLED(Y_DUAL_ENDSTOPS)
+#define Y2_USE_ENDSTOP _YMAX_
+#define Y2_ENDSTOP_ADJUSTMENT 0
+#endif
 #endif
 
 //
 // For Z set the number of stepper drivers
 //
-#define NUM_Z_STEPPER_DRIVERS 1   // (1-4) Z options change based on how many
+#define NUM_Z_STEPPER_DRIVERS 1 // (1-4) Z options change based on how many
 
 #if NUM_Z_STEPPER_DRIVERS > 1
-  //#define Z_MULTI_ENDSTOPS
-  #if ENABLED(Z_MULTI_ENDSTOPS)
-    #define Z2_USE_ENDSTOP          _XMAX_
-    #define Z2_ENDSTOP_ADJUSTMENT   0
-    #if NUM_Z_STEPPER_DRIVERS >= 3
-      #define Z3_USE_ENDSTOP        _YMAX_
-      #define Z3_ENDSTOP_ADJUSTMENT 0
-    #endif
-    #if NUM_Z_STEPPER_DRIVERS >= 4
-      #define Z4_USE_ENDSTOP        _ZMAX_
-      #define Z4_ENDSTOP_ADJUSTMENT 0
-    #endif
-  #endif
+//#define Z_MULTI_ENDSTOPS
+#if ENABLED(Z_MULTI_ENDSTOPS)
+#define Z2_USE_ENDSTOP _XMAX_
+#define Z2_ENDSTOP_ADJUSTMENT 0
+#if NUM_Z_STEPPER_DRIVERS >= 3
+#define Z3_USE_ENDSTOP _YMAX_
+#define Z3_ENDSTOP_ADJUSTMENT 0
+#endif
+#if NUM_Z_STEPPER_DRIVERS >= 4
+#define Z4_USE_ENDSTOP _ZMAX_
+#define Z4_ENDSTOP_ADJUSTMENT 0
+#endif
+#endif
 #endif
 
 /**
@@ -678,12 +678,12 @@
  */
 //#define Z_STEPPER_AUTO_ALIGN
 #if ENABLED(Z_STEPPER_AUTO_ALIGN)
-  // Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
-  // If not defined, probe limits will be used.
-  // Override with 'M422 S<index> X<pos> Y<pos>'
-  //#define Z_STEPPER_ALIGN_XY { {  10, 190 }, { 100,  10 }, { 190, 190 } }
+// Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
+// If not defined, probe limits will be used.
+// Override with 'M422 S<index> X<pos> Y<pos>'
+//#define Z_STEPPER_ALIGN_XY { {  10, 190 }, { 100,  10 }, { 190, 190 } }
 
-  /**
+/**
    * Orientation for the automatically-calculated probe positions.
    * Override Z stepper align points with 'M422 S<index> X<pos> Y<pos>'
    *
@@ -703,29 +703,32 @@
    *               | 1   2 | 2   3 | 3   4 | 4   1 |
    *
    */
-  #ifndef Z_STEPPER_ALIGN_XY
-    //#define Z_STEPPERS_ORIENTATION 0
-  #endif
+#ifndef Z_STEPPER_ALIGN_XY
+//#define Z_STEPPERS_ORIENTATION 0
+#endif
 
-  // Provide Z stepper positions for more rapid convergence in bed alignment.
-  // Requires triple stepper drivers (i.e., set NUM_Z_STEPPER_DRIVERS to 3)
-  //#define Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS
-  #if ENABLED(Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS)
-    // Define Stepper XY positions for Z1, Z2, Z3 corresponding to
-    // the Z screw positions in the bed carriage.
-    // Define one position per Z stepper in stepper driver order.
-    #define Z_STEPPER_ALIGN_STEPPER_XY { { 210.7, 102.5 }, { 152.6, 220.0 }, { 94.5, 102.5 } }
-  #else
-    // Amplification factor. Used to scale the correction step up or down in case
-    // the stepper (spindle) position is farther out than the test point.
-    #define Z_STEPPER_ALIGN_AMP 1.0       // Use a value > 1.0 NOTE: This may cause instability!
-  #endif
+// Provide Z stepper positions for more rapid convergence in bed alignment.
+// Requires triple stepper drivers (i.e., set NUM_Z_STEPPER_DRIVERS to 3)
+//#define Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS
+#if ENABLED(Z_STEPPER_ALIGN_KNOWN_STEPPER_POSITIONS)
+// Define Stepper XY positions for Z1, Z2, Z3 corresponding to
+// the Z screw positions in the bed carriage.
+// Define one position per Z stepper in stepper driver order.
+#define Z_STEPPER_ALIGN_STEPPER_XY                  \
+  {                                                 \
+    {210.7, 102.5}, {152.6, 220.0}, { 94.5, 102.5 } \
+  }
+#else
+// Amplification factor. Used to scale the correction step up or down in case
+// the stepper (spindle) position is farther out than the test point.
+#define Z_STEPPER_ALIGN_AMP 1.0 // Use a value > 1.0 NOTE: This may cause instability!
+#endif
 
-  // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
-  #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
-  #define Z_STEPPER_ALIGN_ITERATIONS 5    // Number of iterations to apply during alignment
-  #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this
-  #define RESTORE_LEVELING_AFTER_G34      // Restore leveling after G34 is done?
+// On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
+#define G34_MAX_GRADE 5              // (%) Maximum incline that G34 will handle
+#define Z_STEPPER_ALIGN_ITERATIONS 5 // Number of iterations to apply during alignment
+#define Z_STEPPER_ALIGN_ACC 0.02     // Stop iterating early if the accuracy is better than this
+#define RESTORE_LEVELING_AFTER_G34   // Restore leveling after G34 is done?
 #endif
 
 // @section motion
@@ -860,13 +863,13 @@
 // probing on a screwhead or hollow washer, probe near the edges.
 //#define CALIBRATION_MEASURE_AT_TOP_EDGES
 
-  // Define the pin to read during calibration
-  #ifndef CALIBRATION_PIN
-    //#define CALIBRATION_PIN -1            // Define here to override the default pin
-    #define CALIBRATION_PIN_INVERTING false // Set to true to invert the custom pin
-    //#define CALIBRATION_PIN_PULLDOWN
-    #define CALIBRATION_PIN_PULLUP
-  #endif
+// Define the pin to read during calibration
+#ifndef CALIBRATION_PIN
+//#define CALIBRATION_PIN -1            // Define here to override the default pin
+#define CALIBRATION_PIN_INVERTING false // Set to true to invert the custom pin
+//#define CALIBRATION_PIN_PULLDOWN
+#define CALIBRATION_PIN_PULLUP
+#endif
 #endif
 
 /**
@@ -1446,7 +1449,7 @@
 // ADC Button Debounce
 //
 #if HAS_ADC_BUTTONS
-  #define ADC_BUTTON_DEBOUNCE_DELAY 16  // (ms) Increase if buttons bounce or repeat too fast
+#define ADC_BUTTON_DEBOUNCE_DELAY 16 // (ms) Increase if buttons bounce or repeat too fast
 #endif
 
 // @section safety
@@ -1599,29 +1602,29 @@
  * For a more detailed explanation of the process see G76_M871.cpp.
  */
 #if HAS_BED_PROBE && TEMP_SENSOR_PROBE && TEMP_SENSOR_BED
-  // Enable thermal first layer compensation using bed and probe temperatures
-  #define PROBE_TEMP_COMPENSATION
+// Enable thermal first layer compensation using bed and probe temperatures
+#define PROBE_TEMP_COMPENSATION
 
-  // Add additional compensation depending on hotend temperature
-  // Note: this values cannot be calibrated and have to be set manually
-  #if ENABLED(PROBE_TEMP_COMPENSATION)
-    // Max temperature that can be reached by heated bed.
-    // This is required only for the calibration process.
-    #define PTC_MAX_BED_TEMP 110
+// Add additional compensation depending on hotend temperature
+// Note: this values cannot be calibrated and have to be set manually
+#if ENABLED(PROBE_TEMP_COMPENSATION)
+// Max temperature that can be reached by heated bed.
+// This is required only for the calibration process.
+#define PTC_MAX_BED_TEMP 110
 
-    // Park position to wait for probe cooldown
-    #define PTC_PARK_POS_X 0.0F
-    #define PTC_PARK_POS_Y 0.0F
-    #define PTC_PARK_POS_Z 100.0F
+// Park position to wait for probe cooldown
+#define PTC_PARK_POS_X 250.0F
+#define PTC_PARK_POS_Y 0.0F
+#define PTC_PARK_POS_Z 125.0F
 
-    // Probe position to probe and wait for probe to reach target temperature
-    #define PTC_PROBE_POS_X  90.0F
-    #define PTC_PROBE_POS_Y 100.0F
+// Probe position to probe and wait for probe to reach target temperature
+#define PTC_PROBE_POS_X 102.5F
+#define PTC_PROBE_POS_Y 114.0F
 
-    // Enable additional compensation using hotend temperature
-    // Note: this values cannot be calibrated automatically but have to be set manually
-    //#define USE_TEMP_EXT_COMPENSATION
-  #endif
+// Enable additional compensation using hotend temperature
+// Note: this values cannot be calibrated automatically but have to be set manually
+//#define USE_TEMP_EXT_COMPENSATION
+#endif
 #endif
 
 // @section extras
@@ -1634,15 +1637,15 @@
 //
 // G2/G3 Arc Support
 //
-#define ARC_SUPPORT                 // Disable this feature to save ~3226 bytes
+#define ARC_SUPPORT // Disable this feature to save ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
-  #define MM_PER_ARC_SEGMENT      1 // (mm) Length (or minimum length) of each arc segment
-  //#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
-  #define MIN_ARC_SEGMENTS       24 // Minimum number of segments in a complete circle
-  //#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
-  #define N_ARC_CORRECTION       25 // Number of interpolated segments between corrections
-  //#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
-  //#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes
+#define MM_PER_ARC_SEGMENT 1 // (mm) Length (or minimum length) of each arc segment
+//#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
+#define MIN_ARC_SEGMENTS 24 // Minimum number of segments in a complete circle
+//#define ARC_SEGMENTS_PER_SEC 50 // Use feedrate to choose segment length (with MM_PER_ARC_SEGMENT as the minimum)
+#define N_ARC_CORRECTION 25 // Number of interpolated segments between corrections
+//#define ARC_P_CIRCLES           // Enable the 'P' parameter to specify complete circles
+//#define CNC_WORKSPACE_PLANES    // Allow G2/G3 to operate in XY, ZX, or YZ planes
 #endif
 
 // Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
@@ -1836,23 +1839,23 @@
  * Applies to all types of extruders except where explicitly noted.
  */
 #if EXTRUDERS > 1
-  // Z raise distance for tool-change, as needed for some extruders
-  #define TOOLCHANGE_ZRAISE     2  // (mm)
-  //#define TOOLCHANGE_NO_RETURN   // Never return to the previous position on tool-change
-  #if ENABLED(TOOLCHANGE_NO_RETURN)
-    //#define EVENT_GCODE_AFTER_TOOLCHANGE "G12X"   // G-code to run after tool-change is complete
-  #endif
+// Z raise distance for tool-change, as needed for some extruders
+#define TOOLCHANGE_ZRAISE 2 // (mm)
+//#define TOOLCHANGE_NO_RETURN   // Never return to the previous position on tool-change
+#if ENABLED(TOOLCHANGE_NO_RETURN)
+//#define EVENT_GCODE_AFTER_TOOLCHANGE "G12X"   // G-code to run after tool-change is complete
+#endif
 
-  // Retract and prime filament on tool-change
-  //#define TOOLCHANGE_FILAMENT_SWAP
-  #if ENABLED(TOOLCHANGE_FILAMENT_SWAP)
-    #define TOOLCHANGE_FIL_SWAP_LENGTH          12  // (mm)
-    #define TOOLCHANGE_FIL_EXTRA_PRIME           2  // (mm)
-    #define TOOLCHANGE_FIL_SWAP_RETRACT_SPEED 3600  // (mm/m)
-    #define TOOLCHANGE_FIL_SWAP_PRIME_SPEED   3600  // (mm/m)
-  #endif
+// Retract and prime filament on tool-change
+//#define TOOLCHANGE_FILAMENT_SWAP
+#if ENABLED(TOOLCHANGE_FILAMENT_SWAP)
+#define TOOLCHANGE_FIL_SWAP_LENGTH 12          // (mm)
+#define TOOLCHANGE_FIL_EXTRA_PRIME 2           // (mm)
+#define TOOLCHANGE_FIL_SWAP_RETRACT_SPEED 3600 // (mm/m)
+#define TOOLCHANGE_FIL_SWAP_PRIME_SPEED 3600   // (mm/m)
+#endif
 
-  /**
+/**
    * Position to park head during tool change.
    * Doesn't apply to SWITCHING_TOOLHEAD, DUAL_X_CARRIAGE, or PARKING_EXTRUDER
    */
@@ -1931,101 +1934,101 @@
  */
 #if HAS_DRIVER(TMC26X)
 
-  #if AXIS_DRIVER_TYPE_X(TMC26X)
-    #define X_MAX_CURRENT     1000  // (mA)
-    #define X_SENSE_RESISTOR    91  // (mOhms)
-    #define X_MICROSTEPS        16  // Number of microsteps
-  #endif
+#if AXIS_DRIVER_TYPE_X(TMC26X)
+#define X_MAX_CURRENT 1000  // (mA)
+#define X_SENSE_RESISTOR 91 // (mOhms)
+#define X_MICROSTEPS 16     // Number of microsteps
+#endif
 
-  #if AXIS_DRIVER_TYPE_X2(TMC26X)
-    #define X2_MAX_CURRENT    1000
-    #define X2_SENSE_RESISTOR   91
-    #define X2_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_X2(TMC26X)
+#define X2_MAX_CURRENT 1000
+#define X2_SENSE_RESISTOR 91
+#define X2_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_Y(TMC26X)
-    #define Y_MAX_CURRENT     1000
-    #define Y_SENSE_RESISTOR    91
-    #define Y_MICROSTEPS        16
-  #endif
+#if AXIS_DRIVER_TYPE_Y(TMC26X)
+#define Y_MAX_CURRENT 1000
+#define Y_SENSE_RESISTOR 91
+#define Y_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_Y2(TMC26X)
-    #define Y2_MAX_CURRENT    1000
-    #define Y2_SENSE_RESISTOR   91
-    #define Y2_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_Y2(TMC26X)
+#define Y2_MAX_CURRENT 1000
+#define Y2_SENSE_RESISTOR 91
+#define Y2_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_Z(TMC26X)
-    #define Z_MAX_CURRENT     1000
-    #define Z_SENSE_RESISTOR    91
-    #define Z_MICROSTEPS        16
-  #endif
+#if AXIS_DRIVER_TYPE_Z(TMC26X)
+#define Z_MAX_CURRENT 1000
+#define Z_SENSE_RESISTOR 91
+#define Z_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_Z2(TMC26X)
-    #define Z2_MAX_CURRENT    1000
-    #define Z2_SENSE_RESISTOR   91
-    #define Z2_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_Z2(TMC26X)
+#define Z2_MAX_CURRENT 1000
+#define Z2_SENSE_RESISTOR 91
+#define Z2_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_Z3(TMC26X)
-    #define Z3_MAX_CURRENT    1000
-    #define Z3_SENSE_RESISTOR   91
-    #define Z3_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_Z3(TMC26X)
+#define Z3_MAX_CURRENT 1000
+#define Z3_SENSE_RESISTOR 91
+#define Z3_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_Z4(TMC26X)
-    #define Z4_MAX_CURRENT    1000
-    #define Z4_SENSE_RESISTOR   91
-    #define Z4_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_Z4(TMC26X)
+#define Z4_MAX_CURRENT 1000
+#define Z4_SENSE_RESISTOR 91
+#define Z4_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_E0(TMC26X)
-    #define E0_MAX_CURRENT    1000
-    #define E0_SENSE_RESISTOR   91
-    #define E0_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_E0(TMC26X)
+#define E0_MAX_CURRENT 1000
+#define E0_SENSE_RESISTOR 91
+#define E0_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_E1(TMC26X)
-    #define E1_MAX_CURRENT    1000
-    #define E1_SENSE_RESISTOR   91
-    #define E1_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_E1(TMC26X)
+#define E1_MAX_CURRENT 1000
+#define E1_SENSE_RESISTOR 91
+#define E1_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_E2(TMC26X)
-    #define E2_MAX_CURRENT    1000
-    #define E2_SENSE_RESISTOR   91
-    #define E2_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_E2(TMC26X)
+#define E2_MAX_CURRENT 1000
+#define E2_SENSE_RESISTOR 91
+#define E2_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_E3(TMC26X)
-    #define E3_MAX_CURRENT    1000
-    #define E3_SENSE_RESISTOR   91
-    #define E3_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_E3(TMC26X)
+#define E3_MAX_CURRENT 1000
+#define E3_SENSE_RESISTOR 91
+#define E3_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_E4(TMC26X)
-    #define E4_MAX_CURRENT    1000
-    #define E4_SENSE_RESISTOR   91
-    #define E4_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_E4(TMC26X)
+#define E4_MAX_CURRENT 1000
+#define E4_SENSE_RESISTOR 91
+#define E4_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_E5(TMC26X)
-    #define E5_MAX_CURRENT    1000
-    #define E5_SENSE_RESISTOR   91
-    #define E5_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_E5(TMC26X)
+#define E5_MAX_CURRENT 1000
+#define E5_SENSE_RESISTOR 91
+#define E5_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_E6(TMC26X)
-    #define E6_MAX_CURRENT    1000
-    #define E6_SENSE_RESISTOR   91
-    #define E6_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_E6(TMC26X)
+#define E6_MAX_CURRENT 1000
+#define E6_SENSE_RESISTOR 91
+#define E6_MICROSTEPS 16
+#endif
 
-  #if AXIS_DRIVER_TYPE_E7(TMC26X)
-    #define E7_MAX_CURRENT    1000
-    #define E7_SENSE_RESISTOR   91
-    #define E7_MICROSTEPS       16
-  #endif
+#if AXIS_DRIVER_TYPE_E7(TMC26X)
+#define E7_MAX_CURRENT 1000
+#define E7_SENSE_RESISTOR 91
+#define E7_MICROSTEPS 16
+#endif
 
 #endif // TMC26X
 
@@ -2049,150 +2052,150 @@
  */
 #if HAS_TRINAMIC
 
-  #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
-  #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
+#define HOLD_MULTIPLIER 0.5 // Scales down the holding current from run current
+#define INTERPOLATE true    // Interpolate X/Y/Z_MICROSTEPS to 256
 
-  #if AXIS_IS_TMC(X)
-    #define X_CURRENT       600        // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
-    #define X_MICROSTEPS     16    // 0..256
-    #define X_RSENSE          0.11
-    #define X_CHAIN_POS      -1    // <=0 : Not chained. 1 : MCU MOSI connected. 2 : Next in chain, ...
-  #endif
+#if AXIS_IS_TMC(X)
+#define X_CURRENT 600            // (mA) RMS current. Multiply by 1.414 for peak current.
+#define X_CURRENT_HOME X_CURRENT // (mA) RMS current for sensorless homing
+#define X_MICROSTEPS 16          // 0..256
+#define X_RSENSE 0.11
+#define X_CHAIN_POS -1 // <=0 : Not chained. 1 : MCU MOSI connected. 2 : Next in chain, ...
+#endif
 
-  #if AXIS_IS_TMC(X2)
-    #define X2_CURRENT      800
-    #define X2_CURRENT_HOME X2_CURRENT
-    #define X2_MICROSTEPS    16
-    #define X2_RSENSE         0.11
-    #define X2_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(X2)
+#define X2_CURRENT 800
+#define X2_CURRENT_HOME X2_CURRENT
+#define X2_MICROSTEPS 16
+#define X2_RSENSE 0.11
+#define X2_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(Y)
-    #define Y_CURRENT       600
-    #define Y_CURRENT_HOME  Y_CURRENT
-    #define Y_MICROSTEPS     16
-    #define Y_RSENSE          0.11
-    #define Y_CHAIN_POS      -1
-  #endif
+#if AXIS_IS_TMC(Y)
+#define Y_CURRENT 600
+#define Y_CURRENT_HOME Y_CURRENT
+#define Y_MICROSTEPS 16
+#define Y_RSENSE 0.11
+#define Y_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(Y2)
-    #define Y2_CURRENT      800
-    #define Y2_CURRENT_HOME Y2_CURRENT
-    #define Y2_MICROSTEPS    16
-    #define Y2_RSENSE         0.11
-    #define Y2_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(Y2)
+#define Y2_CURRENT 800
+#define Y2_CURRENT_HOME Y2_CURRENT
+#define Y2_MICROSTEPS 16
+#define Y2_RSENSE 0.11
+#define Y2_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT       800
-    #define Z_CURRENT_HOME  Z_CURRENT
-    #define Z_MICROSTEPS     16
-    #define Z_RSENSE          0.11
-    #define Z_CHAIN_POS      -1
-  #endif
+#if AXIS_IS_TMC(Z)
+#define Z_CURRENT 800
+#define Z_CURRENT_HOME Z_CURRENT
+#define Z_MICROSTEPS 16
+#define Z_RSENSE 0.11
+#define Z_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(Z2)
-    #define Z2_CURRENT      800
-    #define Z2_CURRENT_HOME Z2_CURRENT
-    #define Z2_MICROSTEPS    16
-    #define Z2_RSENSE         0.11
-    #define Z2_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(Z2)
+#define Z2_CURRENT 800
+#define Z2_CURRENT_HOME Z2_CURRENT
+#define Z2_MICROSTEPS 16
+#define Z2_RSENSE 0.11
+#define Z2_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(Z3)
-    #define Z3_CURRENT      800
-    #define Z3_CURRENT_HOME Z3_CURRENT
-    #define Z3_MICROSTEPS    16
-    #define Z3_RSENSE         0.11
-    #define Z3_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(Z3)
+#define Z3_CURRENT 800
+#define Z3_CURRENT_HOME Z3_CURRENT
+#define Z3_MICROSTEPS 16
+#define Z3_RSENSE 0.11
+#define Z3_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(Z4)
-    #define Z4_CURRENT      800
-    #define Z4_CURRENT_HOME Z4_CURRENT
-    #define Z4_MICROSTEPS    16
-    #define Z4_RSENSE         0.11
-    #define Z4_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(Z4)
+#define Z4_CURRENT 800
+#define Z4_CURRENT_HOME Z4_CURRENT
+#define Z4_MICROSTEPS 16
+#define Z4_RSENSE 0.11
+#define Z4_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(E0)
-    #define E0_CURRENT      800
-    #define E0_MICROSTEPS    16
-    #define E0_RSENSE         0.11
-    #define E0_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(E0)
+#define E0_CURRENT 800
+#define E0_MICROSTEPS 16
+#define E0_RSENSE 0.11
+#define E0_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(E1)
-    #define E1_CURRENT      800
-    #define E1_MICROSTEPS    16
-    #define E1_RSENSE         0.11
-    #define E1_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(E1)
+#define E1_CURRENT 800
+#define E1_MICROSTEPS 16
+#define E1_RSENSE 0.11
+#define E1_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(E2)
-    #define E2_CURRENT      800
-    #define E2_MICROSTEPS    16
-    #define E2_RSENSE         0.11
-    #define E2_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(E2)
+#define E2_CURRENT 800
+#define E2_MICROSTEPS 16
+#define E2_RSENSE 0.11
+#define E2_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(E3)
-    #define E3_CURRENT      800
-    #define E3_MICROSTEPS    16
-    #define E3_RSENSE         0.11
-    #define E3_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(E3)
+#define E3_CURRENT 800
+#define E3_MICROSTEPS 16
+#define E3_RSENSE 0.11
+#define E3_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(E4)
-    #define E4_CURRENT      800
-    #define E4_MICROSTEPS    16
-    #define E4_RSENSE         0.11
-    #define E4_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(E4)
+#define E4_CURRENT 800
+#define E4_MICROSTEPS 16
+#define E4_RSENSE 0.11
+#define E4_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(E5)
-    #define E5_CURRENT      800
-    #define E5_MICROSTEPS    16
-    #define E5_RSENSE         0.11
-    #define E5_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(E5)
+#define E5_CURRENT 800
+#define E5_MICROSTEPS 16
+#define E5_RSENSE 0.11
+#define E5_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(E6)
-    #define E6_CURRENT      800
-    #define E6_MICROSTEPS    16
-    #define E6_RSENSE         0.11
-    #define E6_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(E6)
+#define E6_CURRENT 800
+#define E6_MICROSTEPS 16
+#define E6_RSENSE 0.11
+#define E6_CHAIN_POS -1
+#endif
 
-  #if AXIS_IS_TMC(E7)
-    #define E7_CURRENT      800
-    #define E7_MICROSTEPS    16
-    #define E7_RSENSE         0.11
-    #define E7_CHAIN_POS     -1
-  #endif
+#if AXIS_IS_TMC(E7)
+#define E7_CURRENT 800
+#define E7_MICROSTEPS 16
+#define E7_RSENSE 0.11
+#define E7_CHAIN_POS -1
+#endif
 
-  /**
+/**
    * Override default SPI pins for TMC2130, TMC2160, TMC2660, TMC5130 and TMC5160 drivers here.
    * The default pins can be found in your board's pins file.
    */
-  //#define X_CS_PIN          -1
-  //#define Y_CS_PIN          -1
-  //#define Z_CS_PIN          -1
-  //#define X2_CS_PIN         -1
-  //#define Y2_CS_PIN         -1
-  //#define Z2_CS_PIN         -1
-  //#define Z3_CS_PIN         -1
-  //#define E0_CS_PIN         -1
-  //#define E1_CS_PIN         -1
-  //#define E2_CS_PIN         -1
-  //#define E3_CS_PIN         -1
-  //#define E4_CS_PIN         -1
-  //#define E5_CS_PIN         -1
-  //#define E6_CS_PIN         -1
-  //#define E7_CS_PIN         -1
+//#define X_CS_PIN          -1
+//#define Y_CS_PIN          -1
+//#define Z_CS_PIN          -1
+//#define X2_CS_PIN         -1
+//#define Y2_CS_PIN         -1
+//#define Z2_CS_PIN         -1
+//#define Z3_CS_PIN         -1
+//#define E0_CS_PIN         -1
+//#define E1_CS_PIN         -1
+//#define E2_CS_PIN         -1
+//#define E3_CS_PIN         -1
+//#define E4_CS_PIN         -1
+//#define E5_CS_PIN         -1
+//#define E6_CS_PIN         -1
+//#define E7_CS_PIN         -1
 
-  /**
+/**
    * Software option for SPI driven drivers (TMC2130, TMC2160, TMC2660, TMC5130 and TMC5160).
    * The default SW SPI pins are defined the respective pins files,
    * but you can override or define them here.
@@ -2214,24 +2217,24 @@
    * Set *_SERIAL_TX_PIN and *_SERIAL_RX_PIN to match for all drivers
    * on the same serial port, either here or in your board's pins file.
    */
-  #define  X_SLAVE_ADDRESS 0
-  #define  Y_SLAVE_ADDRESS 0
-  #define  Z_SLAVE_ADDRESS 0
-  #define X2_SLAVE_ADDRESS 0
-  #define Y2_SLAVE_ADDRESS 0
-  #define Z2_SLAVE_ADDRESS 0
-  #define Z3_SLAVE_ADDRESS 0
-  #define Z4_SLAVE_ADDRESS 0
-  #define E0_SLAVE_ADDRESS 0
-  #define E1_SLAVE_ADDRESS 0
-  #define E2_SLAVE_ADDRESS 0
-  #define E3_SLAVE_ADDRESS 0
-  #define E4_SLAVE_ADDRESS 0
-  #define E5_SLAVE_ADDRESS 0
-  #define E6_SLAVE_ADDRESS 0
-  #define E7_SLAVE_ADDRESS 0
+#define X_SLAVE_ADDRESS 0
+#define Y_SLAVE_ADDRESS 0
+#define Z_SLAVE_ADDRESS 0
+#define X2_SLAVE_ADDRESS 0
+#define Y2_SLAVE_ADDRESS 0
+#define Z2_SLAVE_ADDRESS 0
+#define Z3_SLAVE_ADDRESS 0
+#define Z4_SLAVE_ADDRESS 0
+#define E0_SLAVE_ADDRESS 0
+#define E1_SLAVE_ADDRESS 0
+#define E2_SLAVE_ADDRESS 0
+#define E3_SLAVE_ADDRESS 0
+#define E4_SLAVE_ADDRESS 0
+#define E5_SLAVE_ADDRESS 0
+#define E6_SLAVE_ADDRESS 0
+#define E7_SLAVE_ADDRESS 0
 
-  /**
+/**
    * Software enable
    *
    * Use for drivers that do not use a dedicated enable pin, but rather handle the same
@@ -2290,26 +2293,26 @@
    * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
    * M913 X/Y/Z/E to live tune the setting
    */
-  //#define HYBRID_THRESHOLD
+//#define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     100  // [mm/s]
-  #define X2_HYBRID_THRESHOLD    100
-  #define Y_HYBRID_THRESHOLD     100
-  #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD       3
-  #define Z2_HYBRID_THRESHOLD      3
-  #define Z3_HYBRID_THRESHOLD      3
-  #define Z4_HYBRID_THRESHOLD      3
-  #define E0_HYBRID_THRESHOLD     30
-  #define E1_HYBRID_THRESHOLD     30
-  #define E2_HYBRID_THRESHOLD     30
-  #define E3_HYBRID_THRESHOLD     30
-  #define E4_HYBRID_THRESHOLD     30
-  #define E5_HYBRID_THRESHOLD     30
-  #define E6_HYBRID_THRESHOLD     30
-  #define E7_HYBRID_THRESHOLD     30
+#define X_HYBRID_THRESHOLD 100 // [mm/s]
+#define X2_HYBRID_THRESHOLD 100
+#define Y_HYBRID_THRESHOLD 100
+#define Y2_HYBRID_THRESHOLD 100
+#define Z_HYBRID_THRESHOLD 3
+#define Z2_HYBRID_THRESHOLD 3
+#define Z3_HYBRID_THRESHOLD 3
+#define Z4_HYBRID_THRESHOLD 3
+#define E0_HYBRID_THRESHOLD 30
+#define E1_HYBRID_THRESHOLD 30
+#define E2_HYBRID_THRESHOLD 30
+#define E3_HYBRID_THRESHOLD 30
+#define E4_HYBRID_THRESHOLD 30
+#define E5_HYBRID_THRESHOLD 30
+#define E6_HYBRID_THRESHOLD 30
+#define E7_HYBRID_THRESHOLD 30
 
-  /**
+/**
    * Use StallGuard2 to home / probe X, Y, Z.
    *
    * TMC2130, TMC2160, TMC2209, TMC2660, TMC5130, and TMC5160 only
@@ -2399,158 +2402,158 @@
 
 #if HAS_L64XX
 
-  //#define L6470_CHITCHAT        // Display additional status info
+//#define L6470_CHITCHAT        // Display additional status info
 
-  #if AXIS_IS_L64XX(X)
-    #define X_MICROSTEPS       128  // Number of microsteps (VALID: 1, 2, 4, 8, 16, 32, 128) - L6474 max is 16
-    #define X_OVERCURRENT     2000  // (mA) Current where the driver detects an over current
-                                    //   L6470 & L6474 - VALID: 375 x (1 - 16) - 6A max - rounds down
-                                    //   POWERSTEP01: VALID: 1000 x (1 - 32) - 32A max - rounds down
-    #define X_STALLCURRENT    1500  // (mA) Current where the driver detects a stall (VALID: 31.25 * (1-128) -  4A max - rounds down)
-                                    //   L6470 & L6474 - VALID: 31.25 * (1-128) -  4A max - rounds down
-                                    //   POWERSTEP01: VALID: 200 x (1 - 32) - 6.4A max - rounds down
-                                    //   L6474 - STALLCURRENT setting is used to set the nominal (TVAL) current
-    #define X_MAX_VOLTAGE      127  // 0-255, Maximum effective voltage seen by stepper - not used by L6474
-    #define X_CHAIN_POS         -1  // Position in SPI chain, 0=Not in chain, 1=Nearest MOSI
-    #define X_SLEW_RATE          1  // 0-3, Slew 0 is slowest, 3 is fastest
-  #endif
+#if AXIS_IS_L64XX(X)
+#define X_MICROSTEPS 128    // Number of microsteps (VALID: 1, 2, 4, 8, 16, 32, 128) - L6474 max is 16
+#define X_OVERCURRENT 2000  // (mA) Current where the driver detects an over current          \
+                            //   L6470 & L6474 - VALID: 375 x (1 - 16) - 6A max - rounds down \
+                            //   POWERSTEP01: VALID: 1000 x (1 - 32) - 32A max - rounds down
+#define X_STALLCURRENT 1500 // (mA) Current where the driver detects a stall (VALID: 31.25 * (1-128) -  4A max - rounds down) \
+                            //   L6470 & L6474 - VALID: 31.25 * (1-128) -  4A max - rounds down                               \
+                            //   POWERSTEP01: VALID: 200 x (1 - 32) - 6.4A max - rounds down                                  \
+                            //   L6474 - STALLCURRENT setting is used to set the nominal (TVAL) current
+#define X_MAX_VOLTAGE 127   // 0-255, Maximum effective voltage seen by stepper - not used by L6474
+#define X_CHAIN_POS -1      // Position in SPI chain, 0=Not in chain, 1=Nearest MOSI
+#define X_SLEW_RATE 1       // 0-3, Slew 0 is slowest, 3 is fastest
+#endif
 
-  #if AXIS_IS_L64XX(X2)
-    #define X2_MICROSTEPS      128
-    #define X2_OVERCURRENT    2000
-    #define X2_STALLCURRENT   1500
-    #define X2_MAX_VOLTAGE     127
-    #define X2_CHAIN_POS        -1
-    #define X2_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(X2)
+#define X2_MICROSTEPS 128
+#define X2_OVERCURRENT 2000
+#define X2_STALLCURRENT 1500
+#define X2_MAX_VOLTAGE 127
+#define X2_CHAIN_POS -1
+#define X2_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(Y)
-    #define Y_MICROSTEPS       128
-    #define Y_OVERCURRENT     2000
-    #define Y_STALLCURRENT    1500
-    #define Y_MAX_VOLTAGE      127
-    #define Y_CHAIN_POS         -1
-    #define Y_SLEW_RATE          1
-  #endif
+#if AXIS_IS_L64XX(Y)
+#define Y_MICROSTEPS 128
+#define Y_OVERCURRENT 2000
+#define Y_STALLCURRENT 1500
+#define Y_MAX_VOLTAGE 127
+#define Y_CHAIN_POS -1
+#define Y_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(Y2)
-    #define Y2_MICROSTEPS      128
-    #define Y2_OVERCURRENT    2000
-    #define Y2_STALLCURRENT   1500
-    #define Y2_MAX_VOLTAGE     127
-    #define Y2_CHAIN_POS        -1
-    #define Y2_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(Y2)
+#define Y2_MICROSTEPS 128
+#define Y2_OVERCURRENT 2000
+#define Y2_STALLCURRENT 1500
+#define Y2_MAX_VOLTAGE 127
+#define Y2_CHAIN_POS -1
+#define Y2_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(Z)
-    #define Z_MICROSTEPS       128
-    #define Z_OVERCURRENT     2000
-    #define Z_STALLCURRENT    1500
-    #define Z_MAX_VOLTAGE      127
-    #define Z_CHAIN_POS         -1
-    #define Z_SLEW_RATE          1
-  #endif
+#if AXIS_IS_L64XX(Z)
+#define Z_MICROSTEPS 128
+#define Z_OVERCURRENT 2000
+#define Z_STALLCURRENT 1500
+#define Z_MAX_VOLTAGE 127
+#define Z_CHAIN_POS -1
+#define Z_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(Z2)
-    #define Z2_MICROSTEPS      128
-    #define Z2_OVERCURRENT    2000
-    #define Z2_STALLCURRENT   1500
-    #define Z2_MAX_VOLTAGE     127
-    #define Z2_CHAIN_POS        -1
-    #define Z2_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(Z2)
+#define Z2_MICROSTEPS 128
+#define Z2_OVERCURRENT 2000
+#define Z2_STALLCURRENT 1500
+#define Z2_MAX_VOLTAGE 127
+#define Z2_CHAIN_POS -1
+#define Z2_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(Z3)
-    #define Z3_MICROSTEPS      128
-    #define Z3_OVERCURRENT    2000
-    #define Z3_STALLCURRENT   1500
-    #define Z3_MAX_VOLTAGE     127
-    #define Z3_CHAIN_POS        -1
-    #define Z3_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(Z3)
+#define Z3_MICROSTEPS 128
+#define Z3_OVERCURRENT 2000
+#define Z3_STALLCURRENT 1500
+#define Z3_MAX_VOLTAGE 127
+#define Z3_CHAIN_POS -1
+#define Z3_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(Z4)
-    #define Z4_MICROSTEPS      128
-    #define Z4_OVERCURRENT    2000
-    #define Z4_STALLCURRENT   1500
-    #define Z4_MAX_VOLTAGE     127
-    #define Z4_CHAIN_POS        -1
-    #define Z4_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(Z4)
+#define Z4_MICROSTEPS 128
+#define Z4_OVERCURRENT 2000
+#define Z4_STALLCURRENT 1500
+#define Z4_MAX_VOLTAGE 127
+#define Z4_CHAIN_POS -1
+#define Z4_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(E0)
-    #define E0_MICROSTEPS      128
-    #define E0_OVERCURRENT    2000
-    #define E0_STALLCURRENT   1500
-    #define E0_MAX_VOLTAGE     127
-    #define E0_CHAIN_POS        -1
-    #define E0_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(E0)
+#define E0_MICROSTEPS 128
+#define E0_OVERCURRENT 2000
+#define E0_STALLCURRENT 1500
+#define E0_MAX_VOLTAGE 127
+#define E0_CHAIN_POS -1
+#define E0_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(E1)
-    #define E1_MICROSTEPS      128
-    #define E1_OVERCURRENT    2000
-    #define E1_STALLCURRENT   1500
-    #define E1_MAX_VOLTAGE     127
-    #define E1_CHAIN_POS        -1
-    #define E1_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(E1)
+#define E1_MICROSTEPS 128
+#define E1_OVERCURRENT 2000
+#define E1_STALLCURRENT 1500
+#define E1_MAX_VOLTAGE 127
+#define E1_CHAIN_POS -1
+#define E1_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(E2)
-    #define E2_MICROSTEPS      128
-    #define E2_OVERCURRENT    2000
-    #define E2_STALLCURRENT   1500
-    #define E2_MAX_VOLTAGE     127
-    #define E2_CHAIN_POS        -1
-    #define E2_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(E2)
+#define E2_MICROSTEPS 128
+#define E2_OVERCURRENT 2000
+#define E2_STALLCURRENT 1500
+#define E2_MAX_VOLTAGE 127
+#define E2_CHAIN_POS -1
+#define E2_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(E3)
-    #define E3_MICROSTEPS      128
-    #define E3_OVERCURRENT    2000
-    #define E3_STALLCURRENT   1500
-    #define E3_MAX_VOLTAGE     127
-    #define E3_CHAIN_POS        -1
-    #define E3_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(E3)
+#define E3_MICROSTEPS 128
+#define E3_OVERCURRENT 2000
+#define E3_STALLCURRENT 1500
+#define E3_MAX_VOLTAGE 127
+#define E3_CHAIN_POS -1
+#define E3_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(E4)
-    #define E4_MICROSTEPS      128
-    #define E4_OVERCURRENT    2000
-    #define E4_STALLCURRENT   1500
-    #define E4_MAX_VOLTAGE     127
-    #define E4_CHAIN_POS        -1
-    #define E4_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(E4)
+#define E4_MICROSTEPS 128
+#define E4_OVERCURRENT 2000
+#define E4_STALLCURRENT 1500
+#define E4_MAX_VOLTAGE 127
+#define E4_CHAIN_POS -1
+#define E4_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(E5)
-    #define E5_MICROSTEPS      128
-    #define E5_OVERCURRENT    2000
-    #define E5_STALLCURRENT   1500
-    #define E5_MAX_VOLTAGE     127
-    #define E5_CHAIN_POS        -1
-    #define E5_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(E5)
+#define E5_MICROSTEPS 128
+#define E5_OVERCURRENT 2000
+#define E5_STALLCURRENT 1500
+#define E5_MAX_VOLTAGE 127
+#define E5_CHAIN_POS -1
+#define E5_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(E6)
-    #define E6_MICROSTEPS      128
-    #define E6_OVERCURRENT    2000
-    #define E6_STALLCURRENT   1500
-    #define E6_MAX_VOLTAGE     127
-    #define E6_CHAIN_POS        -1
-    #define E6_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(E6)
+#define E6_MICROSTEPS 128
+#define E6_OVERCURRENT 2000
+#define E6_STALLCURRENT 1500
+#define E6_MAX_VOLTAGE 127
+#define E6_CHAIN_POS -1
+#define E6_SLEW_RATE 1
+#endif
 
-  #if AXIS_IS_L64XX(E7)
-    #define E7_MICROSTEPS      128
-    #define E7_OVERCURRENT    2000
-    #define E7_STALLCURRENT   1500
-    #define E7_MAX_VOLTAGE     127
-    #define E7_CHAIN_POS        -1
-    #define E7_SLEW_RATE         1
-  #endif
+#if AXIS_IS_L64XX(E7)
+#define E7_MICROSTEPS 128
+#define E7_OVERCURRENT 2000
+#define E7_STALLCURRENT 1500
+#define E7_MAX_VOLTAGE 127
+#define E7_CHAIN_POS -1
+#define E7_SLEW_RATE 1
+#endif
 
-  /**
+/**
    * Monitor L6470 drivers for error conditions like over temperature and over current.
    * In the case of over temperature Marlin can decrease the drive until the error condition clears.
    * Other detected conditions can be used to stop the current print.
@@ -2613,7 +2616,7 @@
 
 //#define EXPERIMENTAL_I2CBUS
 #if ENABLED(EXPERIMENTAL_I2CBUS)
-  #define I2C_SLAVE_ADDRESS  0  // Set a value from 8 to 127 to act as a slave
+#define I2C_SLAVE_ADDRESS 0 // Set a value from 8 to 127 to act as a slave
 #endif
 
 // @section extras
@@ -2641,10 +2644,10 @@
 // Optional second move with delay to trigger the camera shutter
 //#define PHOTO_SWITCH_POSITION { X_MAX_POS, Y_MAX_POS }  // { xpos, ypos } (M240 I J)
 
-  // Duration to hold the switch or keep CHDK_PIN high
-  //#define PHOTO_SWITCH_MS   50 // (ms) (M240 D)
+// Duration to hold the switch or keep CHDK_PIN high
+//#define PHOTO_SWITCH_MS   50 // (ms) (M240 D)
 
-  /**
+/**
    * PHOTO_PULSES_US may need adjustment depending on board and camera model.
    * Pin must be running at 48.4kHz.
    * Be sure to use a PHOTOGRAPH_PIN which can rise and fall quick enough.
@@ -2653,10 +2656,10 @@
    *  Example pulse data for Nikon: https://bit.ly/2FKD0Aq
    *                     IR Wiring: https://git.io/JvJf7
    */
-  //#define PHOTO_PULSES_US { 2000, 27850, 400, 1580, 400, 3580, 400 }  // (µs) Durations for each 48.4kHz oscillation
-  #ifdef PHOTO_PULSES_US
-    #define PHOTO_PULSE_DELAY_US 13 // (µs) Approximate duration of each HIGH and LOW pulse in the oscillation
-  #endif
+//#define PHOTO_PULSES_US { 2000, 27850, 400, 1580, 400, 3580, 400 }  // (µs) Durations for each 48.4kHz oscillation
+#ifdef PHOTO_PULSES_US
+#define PHOTO_PULSE_DELAY_US 13 // (µs) Approximate duration of each HIGH and LOW pulse in the oscillation
+#endif
 #endif
 
 /**
@@ -2821,7 +2824,7 @@
 #define FASTER_GCODE_PARSER
 
 #if ENABLED(FASTER_GCODE_PARSER)
-  //#define GCODE_QUOTED_STRINGS  // Support for quoted string parameters
+//#define GCODE_QUOTED_STRINGS  // Support for quoted string parameters
 #endif
 
 /**
@@ -3072,11 +3075,11 @@
 //#define ESP3D_WIFISUPPORT   // ESP3D Library WiFi management (https://github.com/luc-github/ESP3DLib)
 
 #if EITHER(WIFISUPPORT, ESP3D_WIFISUPPORT)
-  //#define WEBSUPPORT          // Start a webserver (which may include auto-discovery)
-  //#define OTASUPPORT          // Support over-the-air firmware updates
-  //#define WIFI_CUSTOM_COMMAND // Accept feature config commands (e.g., WiFi ESP3D) from the host
+//#define WEBSUPPORT          // Start a webserver (which may include auto-discovery)
+//#define OTASUPPORT          // Support over-the-air firmware updates
+//#define WIFI_CUSTOM_COMMAND // Accept feature config commands (e.g., WiFi ESP3D) from the host
 
-  /**
+/**
    * To set a default WiFi SSID / Password, create a file called Configuration_Secure.h with
    * the following defines, customized for your network. This specific file is excluded via
    * .gitignore to prevent it from accidentally leaking to the public.
@@ -3084,7 +3087,7 @@
    *   #define WIFI_SSID "WiFi SSID"
    *   #define WIFI_PWD  "WiFi Password"
    */
-  //#include "Configuration_Secure.h" // External file with WiFi SSID / Password
+//#include "Configuration_Secure.h" // External file with WiFi SSID / Password
 #endif
 
 /**
