@@ -771,7 +771,7 @@
  */
 #define DEFAULT_MAX_FEEDRATE \
   {                          \
-    500, 500, 10, 200        \
+    500, 500, 12, 200        \
   }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
@@ -995,7 +995,7 @@
  */
 #define NOZZLE_TO_PROBE_OFFSET \
   {                            \
-    24, 9, -0.65               \
+    24, 9, -0.88               \
   }
 
 // Most probes should stay away from the edges of the bed, but
