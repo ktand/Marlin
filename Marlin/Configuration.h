@@ -776,7 +776,7 @@
  */
 #define DEFAULT_MAX_FEEDRATE \
   {                          \
-    200, 200, 30, 120        \
+    250, 250, 30, 120        \
   }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
@@ -1000,7 +1000,7 @@
  */
 #define NOZZLE_TO_PROBE_OFFSET \
   {                            \
-    23, 5, -0.78               \
+    23, 5, -0.68               \
   }
 
 // Most probes should stay away from the edges of the bed, but
@@ -1008,13 +1008,13 @@
 #define MIN_PROBE_EDGE 0
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 12000
+#define XY_PROBE_SPEED 15000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST (800) // HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST (1200) // HOMING_FEEDRATE_Z
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 4)
+#define Z_PROBE_SPEED_SLOW (180)
 
 /**
  * Multiple Probing

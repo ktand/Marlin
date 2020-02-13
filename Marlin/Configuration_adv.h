@@ -1498,7 +1498,7 @@
 
 //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-//#define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+#define BABYSTEP_ZPROBE_OFFSET // Combine M851 Z and Babystepping
 #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
 //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
 //#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
@@ -1613,13 +1613,13 @@
 #define PTC_MAX_BED_TEMP 110
 
 // Park position to wait for probe cooldown
-#define PTC_PARK_POS_X 250.0F
+#define PTC_PARK_POS_X 0.0F
 #define PTC_PARK_POS_Y 0.0F
-#define PTC_PARK_POS_Z 125.0F
+#define PTC_PARK_POS_Z 100.0F
 
 // Probe position to probe and wait for probe to reach target temperature
-#define PTC_PROBE_POS_X 102.5F
-#define PTC_PROBE_POS_Y 114.0F
+#define PTC_PROBE_POS_X 90.5F
+#define PTC_PROBE_POS_Y 100.0F
 
 // Enable additional compensation using hotend temperature
 // Note: this values cannot be calibrated automatically but have to be set manually
