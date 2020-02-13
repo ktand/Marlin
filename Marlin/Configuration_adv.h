@@ -591,7 +591,7 @@
 // Homing hits each endstop, retracts by these distances, then does a slower bump.
 #define X_HOME_BUMP_MM 0
 #define Y_HOME_BUMP_MM 0
-#define Z_HOME_BUMP_MM 2
+#define Z_HOME_BUMP_MM 1
 #define HOMING_BUMP_DIVISOR \
    {                        \
       8, 8, 8               \
@@ -1564,7 +1564,7 @@
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
 //#define MIN_PROBE_EDGE_LEFT MIN_PROBE_EDGE
-//#define MIN_PROBE_EDGE_RIGHT MIN_PROBE_EDGE
+#define MIN_PROBE_EDGE_RIGHT 23
 //#define MIN_PROBE_EDGE_FRONT MIN_PROBE_EDGE
 //#define MIN_PROBE_EDGE_BACK MIN_PROBE_EDGE
 #endif
@@ -2056,9 +2056,9 @@
 #define INTERPOLATE true    // Interpolate X/Y/Z_MICROSTEPS to 256
 
 #if AXIS_IS_TMC(X)
-#define X_CURRENT 500            // (mA) RMS current. Multiply by 1.414 for peak current.
-#define X_CURRENT_HOME 350       // (mA) RMS current for sensorless homing
-#define X_MICROSTEPS 16          // 0..256
+#define X_CURRENT 500      // (mA) RMS current. Multiply by 1.414 for peak current.
+#define X_CURRENT_HOME 350 // (mA) RMS current for sensorless homing
+#define X_MICROSTEPS 16    // 0..256
 #define X_RSENSE 0.11
 #define X_CHAIN_POS -1 // <=0 : Not chained. 1 : MCU MOSI connected. 2 : Next in chain, ...
 #endif
