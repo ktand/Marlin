@@ -2088,7 +2088,7 @@
 #endif
 
 #if AXIS_IS_TMC(Z)
-#define Z_CURRENT 800
+#define Z_CURRENT 550
 #define Z_CURRENT_HOME Z_CURRENT
 #define Z_MICROSTEPS 16
 #define Z_RSENSE 0.11
@@ -2120,8 +2120,8 @@
 #endif
 
 #if AXIS_IS_TMC(E0)
-#define E0_CURRENT 800
-#define E0_MICROSTEPS 16
+#define E0_CURRENT 500
+#define E0_MICROSTEPS 32
 #define E0_RSENSE 0.11
 #define E0_CHAIN_POS -1
 #endif
@@ -2247,7 +2247,7 @@
    * Use Trinamic's ultra quiet stepping mode.
    * When disabled, Marlin will use spreadCycle stepping mode.
    */
-// #define STEALTHCHOP_XY
+#define STEALTHCHOP_XY
 // #define STEALTHCHOP_Z
 // #define STEALTHCHOP_E
 
@@ -2265,7 +2265,7 @@
    * Define you own with
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-#define CHOPPER_TIMING CHOPPER_DEFAULT_19V
+#define CHOPPER_TIMING CHOPPER_DEFAULT_24V
 
 /**
    * Monitor Trinamic drivers for error conditions,
@@ -2347,9 +2347,9 @@
 
 #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
 // TMC2209: 0...255. TMC2130: -64...63
-#define X_STALL_SENSITIVITY -2
+#define X_STALL_SENSITIVITY 150
 #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-#define Y_STALL_SENSITIVITY -2
+#define Y_STALL_SENSITIVITY 150
 //#define Z_STALL_SENSITIVITY  8
 //#define SPI_ENDSTOPS              // TMC2130 only
 //#define IMPROVE_HOMING_RELIABILITY
