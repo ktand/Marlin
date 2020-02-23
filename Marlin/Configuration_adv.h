@@ -1351,86 +1351,88 @@
 // Touch UI for the FTDI Embedded Video Engine (EVE)
 //
 #if ENABLED(TOUCH_UI_FTDI_EVE)
-// Display board used
-//#define LCD_FTDI_VM800B35A        // FTDI 3.5" with FT800 (320x240)
-//#define LCD_4DSYSTEMS_4DLCD_FT843 // 4D Systems 4.3" (480x272)
-//#define LCD_HAOYU_FT800CB         // Haoyu with 4.3" or 5" (480x272)
-//#define LCD_HAOYU_FT810CB         // Haoyu with 5" (800x480)
-//#define LCD_ALEPHOBJECTS_CLCD_UI  // Aleph Objects Color LCD UI
+  // Display board used
+  //#define LCD_FTDI_VM800B35A        // FTDI 3.5" with FT800 (320x240)
+  //#define LCD_4DSYSTEMS_4DLCD_FT843 // 4D Systems 4.3" (480x272)
+  //#define LCD_HAOYU_FT800CB         // Haoyu with 4.3" or 5" (480x272)
+  //#define LCD_HAOYU_FT810CB         // Haoyu with 5" (800x480)
+  //#define LCD_ALEPHOBJECTS_CLCD_UI  // Aleph Objects Color LCD UI
 
-// Correct the resolution if not using the stock TFT panel.
-//#define TOUCH_UI_320x240
-//#define TOUCH_UI_480x272
-//#define TOUCH_UI_800x480
+  // Correct the resolution if not using the stock TFT panel.
+  //#define TOUCH_UI_320x240
+  //#define TOUCH_UI_480x272
+  //#define TOUCH_UI_800x480
 
-// Mappings for boards with a standard RepRapDiscount Display connector
-//#define AO_EXP1_PINMAP    // AlephObjects CLCD UI EXP1 mapping
-//#define AO_EXP2_PINMAP    // AlephObjects CLCD UI EXP2 mapping
-//#define CR10_TFT_PINMAP   // Rudolph Riedel's CR10 pin mapping
-//#define OTHER_PIN_LAYOUT  // Define pins manually below
-#if ENABLED(OTHER_PIN_LAYOUT)
-// The pins for CS and MOD_RESET (PD) must be chosen.
-#define CLCD_MOD_RESET 9
-#define CLCD_SPI_CS 10
+  // Mappings for boards with a standard RepRapDiscount Display connector
+  //#define AO_EXP1_PINMAP    // AlephObjects CLCD UI EXP1 mapping
+  //#define AO_EXP2_PINMAP    // AlephObjects CLCD UI EXP2 mapping
+  //#define CR10_TFT_PINMAP   // Rudolph Riedel's CR10 pin mapping
+  //#define S6_TFT_PINMAP     // FYSETC S6 pin mapping
 
-// If using software SPI, specify pins for SCLK, MOSI, MISO
-//#define CLCD_USE_SOFT_SPI
-#if ENABLED(CLCD_USE_SOFT_SPI)
-#define CLCD_SOFT_SPI_MOSI 11
-#define CLCD_SOFT_SPI_MISO 12
-#define CLCD_SOFT_SPI_SCLK 13
-#endif
-#endif
+  //#define OTHER_PIN_LAYOUT  // Define pins manually below
+  #if ENABLED(OTHER_PIN_LAYOUT)
+    // Pins for CS and MOD_RESET (PD) must be chosen
+    #define CLCD_MOD_RESET  9
+    #define CLCD_SPI_CS    10
 
-// Display Orientation. An inverted (i.e. upside-down) display
-// is supported on the FT800. The FT810 and beyond also support
-// portrait and mirrored orientations.
-//#define TOUCH_UI_INVERTED
-//#define TOUCH_UI_PORTRAIT
-//#define TOUCH_UI_MIRRORED
+    // If using software SPI, specify pins for SCLK, MOSI, MISO
+    //#define CLCD_USE_SOFT_SPI
+    #if ENABLED(CLCD_USE_SOFT_SPI)
+      #define CLCD_SOFT_SPI_MOSI 11
+      #define CLCD_SOFT_SPI_MISO 12
+      #define CLCD_SOFT_SPI_SCLK 13
+    #endif
+  #endif
 
-// UTF8 processing and rendering.
-// Unsupported characters are shown as '?'.
-//#define TOUCH_UI_USE_UTF8
-#if ENABLED(TOUCH_UI_USE_UTF8)
-// Western accents support. These accented characters use
-// combined bitmaps and require relatively little storage.
-#define TOUCH_UI_UTF8_WESTERN_CHARSET
-#if ENABLED(TOUCH_UI_UTF8_WESTERN_CHARSET)
-// Additional character groups. These characters require
-// full bitmaps and take up considerable storage:
-//#define TOUCH_UI_UTF8_SUPERSCRIPTS  // ¹ ² ³
-//#define TOUCH_UI_UTF8_COPYRIGHT     // © ®
-//#define TOUCH_UI_UTF8_GERMANIC      // ß
-//#define TOUCH_UI_UTF8_SCANDINAVIAN  // Æ Ð Ø Þ æ ð ø þ
-//#define TOUCH_UI_UTF8_PUNCTUATION   // « » ¿ ¡
-//#define TOUCH_UI_UTF8_CURRENCY      // ¢ £ ¤ ¥
-//#define TOUCH_UI_UTF8_ORDINALS      // º ª
-//#define TOUCH_UI_UTF8_MATHEMATICS   // ± × ÷
-//#define TOUCH_UI_UTF8_FRACTIONS     // ¼ ½ ¾
-//#define TOUCH_UI_UTF8_SYMBOLS       // µ ¶ ¦ § ¬
-#endif
-#endif
+  // Display Orientation. An inverted (i.e. upside-down) display
+  // is supported on the FT800. The FT810 and beyond also support
+  // portrait and mirrored orientations.
+  //#define TOUCH_UI_INVERTED
+  //#define TOUCH_UI_PORTRAIT
+  //#define TOUCH_UI_MIRRORED
 
-// Use a smaller font when labels don't fit buttons
-#define TOUCH_UI_FIT_TEXT
+  // UTF8 processing and rendering.
+  // Unsupported characters are shown as '?'.
+  //#define TOUCH_UI_USE_UTF8
+  #if ENABLED(TOUCH_UI_USE_UTF8)
+    // Western accents support. These accented characters use
+    // combined bitmaps and require relatively little storage.
+    #define TOUCH_UI_UTF8_WESTERN_CHARSET
+    #if ENABLED(TOUCH_UI_UTF8_WESTERN_CHARSET)
+      // Additional character groups. These characters require
+      // full bitmaps and take up considerable storage:
+      //#define TOUCH_UI_UTF8_SUPERSCRIPTS  // ¹ ² ³
+      //#define TOUCH_UI_UTF8_COPYRIGHT     // © ®
+      //#define TOUCH_UI_UTF8_GERMANIC      // ß
+      //#define TOUCH_UI_UTF8_SCANDINAVIAN  // Æ Ð Ø Þ æ ð ø þ
+      //#define TOUCH_UI_UTF8_PUNCTUATION   // « » ¿ ¡
+      //#define TOUCH_UI_UTF8_CURRENCY      // ¢ £ ¤ ¥
+      //#define TOUCH_UI_UTF8_ORDINALS      // º ª
+      //#define TOUCH_UI_UTF8_MATHEMATICS   // ± × ÷
+      //#define TOUCH_UI_UTF8_FRACTIONS     // ¼ ½ ¾
+      //#define TOUCH_UI_UTF8_SYMBOLS       // µ ¶ ¦ § ¬
+    #endif
+  #endif
 
-// Allow language selection from menu at run-time (otherwise use LCD_LANGUAGE)
-//#define LCD_LANGUAGE_1 en
-//#define LCD_LANGUAGE_2 fr
-//#define LCD_LANGUAGE_3 de
-//#define LCD_LANGUAGE_4 es
-//#define LCD_LANGUAGE_5 it
+  // Use a smaller font when labels don't fit buttons
+  #define TOUCH_UI_FIT_TEXT
 
-// Use a numeric passcode for "Screen lock" keypad.
-// (recommended for smaller displays)
-//#define TOUCH_UI_PASSCODE
+  // Allow language selection from menu at run-time (otherwise use LCD_LANGUAGE)
+  //#define LCD_LANGUAGE_1 en
+  //#define LCD_LANGUAGE_2 fr
+  //#define LCD_LANGUAGE_3 de
+  //#define LCD_LANGUAGE_4 es
+  //#define LCD_LANGUAGE_5 it
 
-// Output extra debug info for Touch UI events
-//#define TOUCH_UI_DEBUG
+  // Use a numeric passcode for "Screen lock" keypad.
+  // (recommended for smaller displays)
+  //#define TOUCH_UI_PASSCODE
 
-// Developer menu (accessed by touching "About Printer" copyright text)
-//#define TOUCH_UI_DEVELOPER_MENU
+  // Output extra debug info for Touch UI events
+  //#define TOUCH_UI_DEBUG
+
+  // Developer menu (accessed by touching "About Printer" copyright text)
+  //#define TOUCH_UI_DEVELOPER_MENU
 #endif
 
 //
@@ -1479,30 +1481,31 @@
  */
 #define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
-//#define BABYSTEP_WITHOUT_HOMING
-//#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
-#define BABYSTEP_INVERT_Z false    // Change if Z babysteps should go the other way
-#define BABYSTEP_MULTIPLICATOR_Z 1 // Babysteps are very small. Increase for faster motion.
-#define BABYSTEP_MULTIPLICATOR_XY 1
+  //#define INTEGRATED_BABYSTEPPING         // EXPERIMENTAL integration of babystepping into the Stepper ISR
+  //#define BABYSTEP_WITHOUT_HOMING
+  //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
+  #define BABYSTEP_INVERT_Z false           // Change if Z babysteps should go the other way
+  #define BABYSTEP_MULTIPLICATOR_Z  1       // Babysteps are very small. Increase for faster motion.
+  #define BABYSTEP_MULTIPLICATOR_XY 1
 
-#define DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
-#if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
-#define DOUBLECLICK_MAX_INTERVAL 1250 // Maximum interval between clicks, in milliseconds. \
-                                      // Note: Extra time may be added to mitigate controller latency.
-//#define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement).
-//#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
-#if ENABLED(MOVE_Z_WHEN_IDLE)
-#define MOVE_Z_IDLE_MULTIPLICATOR 1 // Multiply 1mm by this factor for the move step size.
-#endif
-#endif
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
+  #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
+    #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
+                                            // Note: Extra time may be added to mitigate controller latency.
+    //#define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement).
+    //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
+    #if ENABLED(MOVE_Z_WHEN_IDLE)
+      #define MOVE_Z_IDLE_MULTIPLICATOR 1   // Multiply 1mm by this factor for the move step size.
+    #endif
+  #endif
 
-//#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
+  //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
 
-#define BABYSTEP_ZPROBE_OFFSET // Combine M851 Z and Babystepping
-#if ENABLED(BABYSTEP_ZPROBE_OFFSET)
-//#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
-//#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
-#endif
+  #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+  #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
+    //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
+    //#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
+  #endif
 #endif
 
 // @section extruder

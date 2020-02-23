@@ -20,29 +20,9 @@
  *
  */
 
-#ifdef ARDUINO_ARCH_ESP32
+#define HEATER_0_PIN        9   // E0
+#define HEATER_1_PIN       10   // E1
+#define FAN_PIN            11
+#define FAN2_PIN           12
 
-#include "../../inc/MarlinConfigPre.h"
-
-#if BOTH(WIFISUPPORT, WEBSUPPORT)
-
-#include "../../inc/MarlinConfig.h"
-
-#undef DISABLED  // esp32-hal-gpio.h
-#include <SPIFFS.h>
-#include "wifi.h"
-
-AsyncEventSource events("/events"); // event source (Server-Sent events)
-
-void onNotFound(AsyncWebServerRequest *request) {
-  request->send(404);
-}
-
-void web_init() {
-  server.addHandler(&events);       // attach AsyncEventSource
-  server.serveStatic("/", SPIFFS, "/www").setDefaultFile("index.html");
-  server.onNotFound(onNotFound);
-}
-
-#endif // WIFISUPPORT && WEBSUPPORT
-#endif // ARDUINO_ARCH_ESP32
+#include "pins_PICA.h"
