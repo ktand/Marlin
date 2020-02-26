@@ -681,7 +681,7 @@
 // Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
 // If not defined, probe limits will be used.
 // Override with 'M422 S<index> X<pos> Y<pos>'
-#define Z_STEPPER_ALIGN_XY { {  35, 105 }, { 235,  105 } }
+#define Z_STEPPER_ALIGN_XY { {  23, 105 }, { 227,  105 } }
 
 /**
    * Orientation for the automatically-calculated probe positions.
@@ -1566,7 +1566,7 @@
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
 //#define MIN_PROBE_EDGE_LEFT MIN_PROBE_EDGE
-//#define MIN_PROBE_EDGE_RIGHT 23
+#define MIN_PROBE_EDGE_RIGHT 23
 //#define MIN_PROBE_EDGE_FRONT MIN_PROBE_EDGE
 //#define MIN_PROBE_EDGE_BACK MIN_PROBE_EDGE
 #endif
