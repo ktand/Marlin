@@ -833,6 +833,8 @@
 #define DEFAULT_YJERK 10.0
 #define DEFAULT_ZJERK 0.3
 
+//#define TRAVEL_EXTRA_XYJERK 0.0     // Additional jerk allowance for all travel moves
+
 //#define LIMITED_JERK_EDITING        // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
 #if ENABLED(LIMITED_JERK_EDITING)
 #define MAX_JERK_EDIT_VALUES \
@@ -1351,7 +1353,7 @@
 //=================================== Mesh ==================================
 //===========================================================================
 
-#define MESH_INSET 10       // Set Mesh bounds as an inset region of the bed
+#define MESH_INSET 20       // Set Mesh bounds as an inset region of the bed
 #define GRID_MAX_POINTS_X 3 // Don't use more than 7 points per axis, implementation limited.
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
