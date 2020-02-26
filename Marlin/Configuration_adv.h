@@ -515,7 +515,7 @@
 //
 // For Z set the number of stepper drivers
 //
-#define NUM_Z_STEPPER_DRIVERS 1 // (1-4) Z options change based on how many
+#define NUM_Z_STEPPER_DRIVERS 2 // (1-4) Z options change based on how many
 
 #if NUM_Z_STEPPER_DRIVERS > 1
 //#define Z_MULTI_ENDSTOPS
@@ -676,12 +676,12 @@
  * Z Steppers Auto-Alignment
  * Add the G34 command to align multiple Z steppers using a bed probe.
  */
-//#define Z_STEPPER_AUTO_ALIGN
+#define Z_STEPPER_AUTO_ALIGN
 #if ENABLED(Z_STEPPER_AUTO_ALIGN)
 // Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
 // If not defined, probe limits will be used.
 // Override with 'M422 S<index> X<pos> Y<pos>'
-//#define Z_STEPPER_ALIGN_XY { {  10, 190 }, { 100,  10 }, { 190, 190 } }
+#define Z_STEPPER_ALIGN_XY { {  35, 105 }, { 235,  105 } }
 
 /**
    * Orientation for the automatically-calculated probe positions.
@@ -1567,7 +1567,7 @@
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
 //#define MIN_PROBE_EDGE_LEFT MIN_PROBE_EDGE
-#define MIN_PROBE_EDGE_RIGHT 23
+//#define MIN_PROBE_EDGE_RIGHT 23
 //#define MIN_PROBE_EDGE_FRONT MIN_PROBE_EDGE
 //#define MIN_PROBE_EDGE_BACK MIN_PROBE_EDGE
 #endif
@@ -2099,7 +2099,7 @@
 #endif
 
 #if AXIS_IS_TMC(Z2)
-#define Z2_CURRENT 800
+#define Z2_CURRENT 550
 #define Z2_CURRENT_HOME Z2_CURRENT
 #define Z2_MICROSTEPS 16
 #define Z2_RSENSE 0.11
@@ -2352,7 +2352,7 @@
 // TMC2209: 0...255. TMC2130: -64...63
 #define X_STALL_SENSITIVITY 150
 #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-#define Y_STALL_SENSITIVITY 120
+#define Y_STALL_SENSITIVITY 110
 //#define Z_STALL_SENSITIVITY  8
 //#define SPI_ENDSTOPS              // TMC2130 only
 //#define IMPROVE_HOMING_RELIABILITY
