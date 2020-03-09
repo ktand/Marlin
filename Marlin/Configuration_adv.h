@@ -1629,7 +1629,7 @@
 #define PTC_PARK_POS_Z 100.0F
 
 // Probe position to probe and wait for probe to reach target temperature
-#define PTC_PROBE_POS_X 90.0F
+#define PTC_PROBE_POS_X 90.5F
 #define PTC_PROBE_POS_Y 100.0F
 
 // Enable additional compensation using hotend temperature
@@ -3166,17 +3166,17 @@
 //#define SERVICE_INTERVAL_3    1 // print hours
 #endif
 
-    // @section develop
+// @section develop
 
-    //
-    // M100 Free Memory Watcher to debug memory usage
-    //
-    //#define M100_FREE_MEMORY_WATCHER
+//
+// M100 Free Memory Watcher to debug memory usage
+//
+//#define M100_FREE_MEMORY_WATCHER
 
-    //
-    // M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
-    //
-    //#define PINS_DEBUGGING
+//
+// M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
+//
+//#define PINS_DEBUGGING
 
-    // Enable Marlin dev mode which adds some special commands
-    //#define MARLIN_DEV_MODE
+// Enable Marlin dev mode which adds some special commands
+//#define MARLIN_DEV_MODE
