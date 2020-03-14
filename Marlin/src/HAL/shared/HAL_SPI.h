@@ -28,7 +28,6 @@
 
 #include "Marduino.h"
 #include <stdint.h>
-#include <SPI.h>
 
 /**
  * SPI speed where 0 <= index <= 6
