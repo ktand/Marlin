@@ -2863,16 +2863,16 @@
   #define USER_GCODE_7 "M302 P0"
 
   #define USER_DESC_8 "Probe UBL Slot 1" //Use probe to setup UBL.
-  #define USER_GCODE_8 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 1"
+  #define USER_GCODE_8 "G28\nM190 S65\nG34\nG29 P0\nG29 P1\nG29 P3\nG29 S1\nG29 A\nG29 F10\nM500\nM140 S0\nM0 Mesh Saved in Slot 1"
 
   #define USER_DESC_9 "Probe UBL Slot 2" //Use probe to setup UBL.
-  #define USER_GCODE_9 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 2"
+  #define USER_GCODE_9 "G28\nM190 S65\nG34\nG29 P0\nG29 P1\nG29 P3\nG29 S2\nG29 A\nG29 F10\nM500\nM140 S0\nM0 Mesh Saved in Slot 2"
 
   #define USER_DESC_10 "Probe UBL Slot 3" //Use probe to setup UBL.
-  #define USER_GCODE_10 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S3\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 3"
+  #define USER_GCODE_10 "G28\nM190 S65\nG34\nG29 P0\nG29 P1\nG29 P3\nG29 S3\nG29 A\nG29 F10\nM500\nM140 S0\nM0 Mesh Saved in Slot 3"
 
   #define USER_DESC_11 "UBL Offset Step 1"
-  #define USER_GCODE_11 "G28\nG1 X125 Y105 Z0.00\nM211 S0\nM0 Lower Z Offset"
+  #define USER_GCODE_11 "G28\nG1 Z0\nM211 S0\nM0 Lower Z Offset"
 
   #define USER_DESC_12 "UBL Offset Step 2"
   #define USER_GCODE_12 "M211 S1\nM500"

@@ -419,7 +419,7 @@
 #define TEMP_SENSOR_5 0
 #define TEMP_SENSOR_6 0
 #define TEMP_SENSOR_7 0
-#define TEMP_SENSOR_BED 13
+#define TEMP_SENSOR_BED 1 // 13
 #define TEMP_SENSOR_PROBE 1
 #define TEMP_SENSOR_CHAMBER 0
 
@@ -541,13 +541,19 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-// #define DEFAULT_bedKp 144.87
-// #define DEFAULT_bedKi 27.00
-// #define DEFAULT_bedKd 194.30
+  // #define DEFAULT_bedKp 144.87
+  // #define DEFAULT_bedKi 27.00
+  // #define DEFAULT_bedKd 194.30
 
-#define DEFAULT_bedKp 120.46
-#define DEFAULT_bedKi 6.28
-#define DEFAULT_bedKd 577.87
+  // With thermistor #13
+  // #define DEFAULT_bedKp 120.46
+  // #define DEFAULT_bedKi 6.28
+  // #define DEFAULT_bedKd 577.87
+
+  // With thermistor #1
+  #define DEFAULT_bedKp 44.17
+  #define DEFAULT_bedKi 2.39
+  #define DEFAULT_bedKd 544.16
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
@@ -753,7 +759,7 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 250, 250, 30, 120 }
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 30, 120 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -766,7 +772,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 200, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 1250, 1250, 200, 10000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -972,7 +978,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET { 23, 5, -0.72 }
+#define NOZZLE_TO_PROBE_OFFSET { 23, 5, 0 } // Z -0.54
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -982,7 +988,7 @@
 #define XY_PROBE_SPEED 10000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST (1200) // HOMING_FEEDRATE_Z
+#define Z_PROBE_SPEED_FAST (1200)
 
 // Feedrate (mm/m) for the "accurate" probe of each point
 #define Z_PROBE_SPEED_SLOW (180)
@@ -1145,7 +1151,7 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  //#define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
 #endif
 
 /**
@@ -1361,7 +1367,7 @@
 // For DELTA this is the top-center of the Cartesian print volume.
 #define MANUAL_X_HOME_POS 0
 #define MANUAL_Y_HOME_POS -2.2
-#define MANUAL_Z_HOME_POS 0.2
+#define MANUAL_Z_HOME_POS 0
 
 // Use "Z Safe Homing" to avoid homing with a Z probe outside the bed area.
 //
@@ -1380,8 +1386,8 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (50 * 60)
-#define HOMING_FEEDRATE_Z (10 * 60)  // Prusa MK3S 800
+#define HOMING_FEEDRATE_XY (50*60)
+#define HOMING_FEEDRATE_Z  (10*60)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
