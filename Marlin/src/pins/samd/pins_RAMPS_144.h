@@ -44,8 +44,9 @@
 //
 // EEPROM
 //
-#define E2END 0x7FFF                              // 32Kb (24lc256)
+//#define QSPI_EEPROM                             // Use AGCM4 onboard QSPI EEPROM (Uses 4K of RAM)
 #define I2C_EEPROM                                // EEPROM on I2C-0
+#define E2END 0x7FFF                              // 32K (24lc256)
 
 //
 // Limit Switches
@@ -128,9 +129,8 @@
   #define FILWIDTH_PIN                         5  // Analog Input on AUX2
 #endif
 
-// RAMPS 1.4 DIO 4 on the servos connector
 #ifndef FIL_RUNOUT_PIN
-  #define FIL_RUNOUT_PIN                       4
+  #define FIL_RUNOUT_PIN                      71
 #endif
 
 #ifndef PS_ON_PIN
