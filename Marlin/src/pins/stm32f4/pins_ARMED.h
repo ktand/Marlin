@@ -80,15 +80,29 @@
   #define X_CS_PIN                          PD1
 #endif
 
-#define Y_STEP_PIN                          PE11
-#define Y_DIR_PIN                           PE10
-#define Y_ENABLE_PIN                        PE13
-#define Y_CS_PIN                            PE12
+#ifdef ARMED_SWAP_Y_Z
+  #define Y_STEP_PIN                          PD6
+  #define Y_DIR_PIN                           PD7
+  #define Y_ENABLE_PIN                        PD4
+  #define Y_CS_PIN                            PD5
+#else
+  #define Y_STEP_PIN                          PE11
+  #define Y_DIR_PIN                           PE10
+  #define Y_ENABLE_PIN                        PE13
+  #define Y_CS_PIN                            PE12
+#endif
 
-#define Z_STEP_PIN                          PD6
-#define Z_DIR_PIN                           PD7
-#define Z_ENABLE_PIN                        PD4
-#define Z_CS_PIN                            PD5
+#ifdef ARMED_SWAP_Y_Z
+  #define Z_STEP_PIN                          PE11
+  #define Z_DIR_PIN                           PE10
+  #define Z_ENABLE_PIN                        PE13
+  #define Z_CS_PIN                            PE12
+#else
+  #define Z_STEP_PIN                          PD6
+  #define Z_DIR_PIN                           PD7
+  #define Z_ENABLE_PIN                        PD4
+  #define Z_CS_PIN                            PD5
+#endif
 
 #define E0_STEP_PIN                         PB5
 #define E0_DIR_PIN                          PB6
